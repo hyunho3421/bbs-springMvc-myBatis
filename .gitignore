@@ -137,4 +137,5 @@ local.properties
 
 src/main/resources/META-INF/
 src/main/webapp/resources/
-src/test/java/
+src/test/java/com/khh/web/DataSourceTest.java
+src/test/java/com/khh/web/MySQLConnectionTest.java
