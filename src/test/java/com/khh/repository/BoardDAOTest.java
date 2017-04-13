@@ -75,7 +75,7 @@ public class BoardDAOTest {
         List<Board> list = boardDAO.listAll();
 
         list.stream().forEach(
-                e-> System.out.println("no : " + e.getNo() + ", title : " + e.getTitle() + ", content : " + e.getContent()
+                e -> System.out.println("no : " + e.getNo() + ", title : " + e.getTitle() + ", content : " + e.getContent()
                 +", writer : " + e.getWriter() + ", reg_date : " + e.getReg_date() + ", view count : " + e.getView_cnt())
         );
 
