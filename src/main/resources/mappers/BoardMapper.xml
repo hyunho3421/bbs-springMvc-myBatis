@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.khh.mapper.BoardMapper">
+    <select id="read" resultType="com.khh.domain.Board">
+        SELECT * FROM board WHERE no = #{no}
+    </select>
+
+    <select id="listAll" resultType="com.khh.domain.Board">
+        SELECT * FROM board ORDER by no DESC, reg_date DESC
+    </select>
+
+    <insert id="add">
+        insert into board(title, content, writer) VALUES (#{title}, #{content}, #{writer})
+    </insert>
+
+    <update id="update">
+        UPDATE FROM board set title = #{title}, content = #{content} where no = #{no}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM board where no = #{no}
+    </delete>
+    
+    <select id="initAutoIncrement">
+        alter table board auto_increment=1;
+    </select>
+
+    <select id="count" resultType="int">
+        SELECT count(*) FROM board
+    </select>
+
+    <delete id="deleteAll">
+        DELETE FROM board
+    </delete>
+</mapper>
