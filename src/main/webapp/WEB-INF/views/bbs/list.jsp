@@ -2,7 +2,7 @@
 <%@ page session="false" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
-<%@include file="include/header.jsp"%>
+<%@include file="../include/header.jsp"%>
 
 <!-- Main content -->
 <section class="content">
@@ -12,11 +12,11 @@
 			<!-- general from elements -->
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">HOME PAGE</h3>
+					<h3 class="box-title">BBS LIST</h3>
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
 
-<%@include file="include/footer.jsp"%>
+<%@include file="../include/footer.jsp"%>
