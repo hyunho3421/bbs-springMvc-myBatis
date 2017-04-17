@@ -12,7 +12,7 @@ public interface BoardService {
 
     List<Board> listAll() throws Exception;
 
-    void add(Board board) throws Exception;
+    void register(Board board) throws Exception;
 
     void delete(int no) throws Exception;
 
