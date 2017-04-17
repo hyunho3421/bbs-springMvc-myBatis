@@ -38,5 +38,4 @@ public class BoardController {
 
         return "/bbs/list";
     }
-
 }

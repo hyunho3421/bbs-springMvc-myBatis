@@ -27,9 +27,9 @@ public class BoardDAOTest {
     @Before
     public void setUp() {
         board = new Board();
-        board.setWriter("hyunho");
-        board.setTitle("test title");
-        board.setContent("contents");
+        board.setWriter("현호");
+        board.setTitle("제목");
+        board.setContent("내용");
     }
 
     @Test
