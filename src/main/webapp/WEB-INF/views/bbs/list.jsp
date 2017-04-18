@@ -14,7 +14,7 @@
 </head>
 <body>
 <div class="container">
-	<table class="table table-striped">
+	<table class="table table-striped table-bordered">
 		<thead>
 			<tr>
 				<th>no</th>
@@ -34,26 +34,20 @@
 					<td><span class="badge">${board.view_cnt}</span></td>
 				</tr>
 			</c:forEach>
+		<c:if test="${empty list}">
+			<tr>
+				<td colspan="5" class="text-center">게시글이 없습니다.</td>
+			</tr>
+		</c:if>
 		</tbody>
 	</table>
+	<div align="right">
+		<button class="btn btn-primary" type="submit" id="btnRegister">등록</button>
+	</div>
 </div>
 
 <script src="/resources/js/jquery-3.2.1.js" ></script>
 <script src="/resources/js/bootstrap.js" ></script>
-<script>
-	var result = '${msg}';
-
-	if(result == 'register_success') {
-	    alert("등록되었습니다.");
-	}
-
-	if(result == 'remove_success') {
-	    alert("삭제 되었습니다.")
-	}
-
-	if(result == 'success_modify') {
-        alert("수정정되었습니다.")
-	}
-</script>
+<script src="/static/bbs/list.js"></script>
 </body>
 </html>

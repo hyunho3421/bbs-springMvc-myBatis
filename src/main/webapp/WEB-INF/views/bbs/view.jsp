@@ -34,9 +34,9 @@
 	</div>
 
 	<div class="list-group">
-		<button class="btn btn-warning" type="submit">Modify</button>
-		<button class="btn btn-danger" type="submit">Delete</button>
-		<button class="btn btn-primary" type="submit" style="width: 70px;">List</button>
+		<button class="btn btn-warning" type="submit" id="btnModify">Modify</button>
+		<button class="btn btn-danger" type="submit" id="btnDelete">Delete</button>
+		<button class="btn btn-primary" type="submit" id="btnList">List</button>
 	</div>
 
 </div>

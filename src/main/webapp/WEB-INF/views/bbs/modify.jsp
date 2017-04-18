@@ -38,8 +38,8 @@
 		</div>
 	</form>
 
-	<button class="btn btn-primary" type="submit">수정</button>
-	<button class="btn btn-warning" type="submit">취소</button>
+	<button class="btn btn-primary" type="submit" id="btnModify">수정</button>
+	<button class="btn btn-warning" type="submit" id="btnCancel">취소</button>
 </div>
 
 <script src="/resources/js/jquery-3.2.1.js" ></script>

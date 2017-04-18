@@ -31,12 +31,16 @@
 			<label for="writer">Writer</label>
 			<input type="text" class="form-control" name="writer" id="writer">
 		</div>
-
-		<button class="btn btn-primary" type="submit">등록</button>
 	</form>
+
+	<div align="right" class="list-group">
+		<button class="btn btn-primary" type="submit" id="btnRegister">등록</button>
+		<button class="btn btn-default" type="submit" id="btnList">List</button>
+	</div>
 </div>
 
-<script src="/resources/js/jquery-3.2.1.js" />
-<script src="/resources/js/bootstrap.js" />
+<script src="/resources/js/jquery-3.2.1.js" ></script>
+<script src="/resources/js/bootstrap.js" ></script>
+<script src="/static/bbs/register.js" ></script>
 </body>
 </html>
