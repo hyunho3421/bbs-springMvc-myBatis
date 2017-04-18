@@ -86,12 +86,48 @@ public class BoardDAOTest {
     public void updateAndAddTest() throws Exception {
         init();
 
+        boardDAO.add(board);
+
         board.setNo(1);
         board.setTitle("수정 제목");
         board.setContent("수정 내용");
         board.setWriter("수정 작성자");
 
         boardDAO.update(board);
+
+        Board updatedBoard = boardDAO.read(1);
+
+        assertThat(updatedBoard.getTitle(), is("수정 제목"));
+        assertThat(updatedBoard.getContent(), is("수정 내용"));
+        assertThat(updatedBoard.getWriter(), is("수정 작성자"));
+
+    }
+
+    @Test
+    public void increaseViewCount() throws Exception {
+        init();
+
+        int view_cnt;
+
+        boardDAO.add(board);
+        view_cnt = boardDAO.read(1).getView_cnt();
+        assertThat(view_cnt, is(0));
+
+        //view count 한번 증가
+        boardDAO.increaseViewCnt(1);
+        view_cnt = boardDAO.read(1).getView_cnt();
+        assertThat(view_cnt, is(1));
+
+        //view count 한번 증가
+        boardDAO.increaseViewCnt(1);
+        view_cnt = boardDAO.read(1).getView_cnt();
+        assertThat(view_cnt, is(2));
+
+        //view count 한번 증가
+        boardDAO.increaseViewCnt(1);
+        view_cnt = boardDAO.read(1).getView_cnt();
+        assertThat(view_cnt, is(3));
+
     }
 
     public void init() throws Exception {

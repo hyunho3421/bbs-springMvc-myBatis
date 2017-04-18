@@ -23,4 +23,6 @@ public interface BoardDAO {
     void deleteAll() throws Exception;
 
     int count() throws Exception;
+
+    void increaseViewCnt(int no) throws Exception;
 }

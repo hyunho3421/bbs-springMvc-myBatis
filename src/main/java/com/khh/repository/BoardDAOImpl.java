@@ -57,4 +57,9 @@ public class BoardDAOImpl implements BoardDAO {
     public int count() throws Exception {
         return sqlSession.selectOne(namespace + ".count");
     }
+
+    @Override
+    public void increaseViewCnt(int no) throws Exception {
+        sqlSession.update(namespace + ".increaseViewCnt", no);
+    }
 }
