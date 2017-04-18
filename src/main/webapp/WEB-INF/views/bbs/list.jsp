@@ -1,3 +1,7 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page session="false" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -10,15 +14,46 @@
 </head>
 <body>
 <div class="container">
-	<div class="form-group">
-		<label for="title">Title</label>
-		<input type="text" class="form-control" name="title" id="title">
-	</div>
-
-
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>no</th>
+				<th width="60%">제목</th>
+				<th>작성자</th>
+				<th>등록일</th>
+				<th>조회수</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach items="${list}" var="board">
+				<tr>
+					<td>${board.no}</td>
+					<td><a href="/bbs/view?no=${board.no}">${board.title}</a></td>
+					<td>${board.writer}</td>
+					<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${board.reg_date}" /></td>
+					<td><span class="badge">${board.view_cnt}</span></td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
 </div>
 
-<script src="/resources/js/jquery-3.2.1.js" />
-<script src="/resources/js/bootstrap.js" />
+<script src="/resources/js/jquery-3.2.1.js" ></script>
+<script src="/resources/js/bootstrap.js" ></script>
+<script>
+	var result = '${msg}';
+
+	if(result == 'register_success') {
+	    alert("등록되었습니다.");
+	}
+
+	if(result == 'remove_success') {
+	    alert("삭제 되었습니다.")
+	}
+
+	if(result == 'success_modify') {
+        alert("수정정되었습니다.")
+	}
+</script>
 </body>
 </html>

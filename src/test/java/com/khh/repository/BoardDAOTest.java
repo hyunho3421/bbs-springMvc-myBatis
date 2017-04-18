@@ -85,6 +85,13 @@ public class BoardDAOTest {
     @Test
     public void updateAndAddTest() throws Exception {
         init();
+
+        board.setNo(1);
+        board.setTitle("수정 제목");
+        board.setContent("수정 내용");
+        board.setWriter("수정 작성자");
+
+        boardDAO.update(board);
     }
 
     public void init() throws Exception {

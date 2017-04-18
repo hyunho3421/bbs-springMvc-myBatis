@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <%@ page session="false" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
@@ -16,27 +17,33 @@
 </head>
 <body>
 <div class="container">
-	<form role="form" method="post" action="/bbs/register">
+	<form role="form">
+		<div class="form-group">
+			<label for="no">No.</label>
+			<input type="text" class="form-control" name="no" id="no" value="${board.no}" readonly="readonly">
+		</div>
 		<div class="form-group">
 			<label for="title">Title</label>
-			<input type="text" class="form-control" name="title" id="title">
+			<input type="text" class="form-control" name="title" id="title" value="${board.title}">
 		</div>
 
 		<div class="form-group">
 			<label for="content">Content</label>
-			<textarea class="form-control" name="content" id="content" rows="5"></textarea>
+			<textarea class="form-control" name="content" id="content" rows="5">${board.content}</textarea>
 		</div>
 
 		<div class="form-group">
 			<label for="writer">Writer</label>
-			<input type="text" class="form-control" name="writer" id="writer">
+			<input type="text" class="form-control" name="writer" id="writer" value="${board.writer}">
 		</div>
-
-		<button class="btn btn-primary" type="submit">등록</button>
 	</form>
+
+	<button class="btn btn-primary" type="submit">수정</button>
+	<button class="btn btn-warning" type="submit">취소</button>
 </div>
 
-<script src="/resources/js/jquery-3.2.1.js" />
-<script src="/resources/js/bootstrap.js" />
+<script src="/resources/js/jquery-3.2.1.js" ></script>
+<script src="/resources/js/bootstrap.js" ></script>
+<script src="/static/bbs/modify.js" ></script>
 </body>
 </html>

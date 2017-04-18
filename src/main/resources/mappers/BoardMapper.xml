@@ -16,7 +16,7 @@
     </insert>
 
     <update id="update">
-        UPDATE FROM board set title = #{title}, content = #{content} where no = #{no}
+        UPDATE board set title = #{title}, content = #{content}, writer = #{writer} where no = #{no}
     </update>
 
     <delete id="delete">
