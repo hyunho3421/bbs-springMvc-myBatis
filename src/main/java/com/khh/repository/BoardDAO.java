@@ -1,6 +1,7 @@
 package com.khh.repository;
 
 import com.khh.domain.Board;
+import com.khh.domain.Criteria;
 
 import java.util.List;
 
@@ -25,4 +26,6 @@ public interface BoardDAO {
     int count() throws Exception;
 
     void increaseViewCnt(int no) throws Exception;
+
+    List<Board> listPage(Criteria cri) throws Exception;
 }

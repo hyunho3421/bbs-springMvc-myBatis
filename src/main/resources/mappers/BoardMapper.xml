@@ -38,4 +38,11 @@
     <update id="increaseViewCnt">
         update board set view_cnt = view_cnt+1 where no = #{no}
     </update>
+
+    <select id="listPage" resultType="Board">
+        <![CDATA[
+          SELECT * FROM board WHERE no > 0 ORDER BY no DESC ,reg_date DESC
+          limit #{pageStart}, #{perPageNum}
+        ]]>
+    </select>
 </mapper>

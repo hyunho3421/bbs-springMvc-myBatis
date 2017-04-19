@@ -1,11 +1,14 @@
 package com.khh.repository;
 
 import com.khh.domain.Board;
+import com.khh.domain.Criteria;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by hyunhokim on 2017. 4. 13..
@@ -61,5 +64,10 @@ public class BoardDAOImpl implements BoardDAO {
     @Override
     public void increaseViewCnt(int no) throws Exception {
         sqlSession.update(namespace + ".increaseViewCnt", no);
+    }
+
+    @Override
+    public List<Board> listPage(Criteria cri) throws Exception {
+        return sqlSession.selectList(namespace + ".listPage", cri);
     }
 }

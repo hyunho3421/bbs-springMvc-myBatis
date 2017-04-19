@@ -1,6 +1,7 @@
 package com.khh.service;
 
 import com.khh.domain.Board;
+import com.khh.domain.Criteria;
 import com.khh.repository.BoardDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,5 +45,10 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public int count() throws Exception {
         return boardDAO.count();
+    }
+
+    @Override
+    public List<Board> listPage(Criteria criteria) throws Exception {
+        return boardDAO.listPage(criteria);
     }
 }

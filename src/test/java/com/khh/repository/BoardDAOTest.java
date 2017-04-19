@@ -1,6 +1,7 @@
 package com.khh.repository;
 
 import com.khh.domain.Board;
+import com.khh.domain.Criteria;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -130,6 +131,39 @@ public class BoardDAOTest {
 
     }
 
+    @Test
+    public void pageListTest() throws Exception {
+        init();
+
+        //페이지 리스트 테스트 하기위해서 게시글 41개 등록
+        for (int i=1; i <= 40; i++) {
+            boardDAO.add(board);
+        }
+
+        //첫번째 페이지 게시물 가져와서 비교
+        Criteria cri = new Criteria();
+        List<Board> list = boardDAO.listPage(cri);
+
+        //게시물 번호 비교 할 변수
+        int index = 40;
+        for (Board board : list) {
+            assertThat(board.getNo(), is(index));
+
+            index--;
+        }
+
+        //두번째 페이지 게시물 20개씩 가져와서 비교, 20번째 게시물부터 1번째까지
+        cri.setPage(2);
+        cri.setPerPageNum(20);
+        list = boardDAO.listPage(cri);
+
+        index = 20;
+        for (Board board : list) {
+            assertThat(board.getNo(), is(index));
+            index--;
+        }
+    }
+
     public void init() throws Exception {
         boardDAO.deleteAll();
         assertThat(boardDAO.count(), is(0));
@@ -137,5 +171,13 @@ public class BoardDAOTest {
         boardDAO.initAutoIncrement();
     }
 
+    @Test
+    public void test() {
+        int a = 11;
+        int b = 10;
+
+        System.out.println(Math.ceil((double)a/b));
+
+    }
 
 }

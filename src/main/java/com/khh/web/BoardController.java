@@ -1,13 +1,14 @@
 package com.khh.web;
 
 import com.khh.domain.Board;
+import com.khh.domain.Criteria;
+import com.khh.domain.PageMaker;
 import com.khh.service.BoardService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -45,10 +46,15 @@ public class BoardController {
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String listGET(Model model) throws Exception {
+    public String listGET(Criteria cri, Model model) throws Exception {
         logger.info("show all list .......");
 
-        model.addAttribute("list", boardService.listAll());
+        PageMaker pageMaker = new PageMaker();
+        pageMaker.setCriteria(cri);
+        pageMaker.setTotalCount(boardService.count());
+
+        model.addAttribute("list", boardService.listPage(cri));
+        model.addAttribute("pageMaker", pageMaker);
 
         return "/bbs/list";
     }
