@@ -7,6 +7,10 @@ $(document).ready(function () {
     $('#btnCancel').on("click", function () {
         var no = $('#no').val();
         document.location = "/bbs/view?no=" + no;
+
+        formObj.attr("action", "/bbs/view");
+        formObj.attr("method", "GET");
+        formObj.submit();
     });
 
     $("#btnModify").on("click", function () {

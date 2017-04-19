@@ -18,6 +18,9 @@
 <body>
 <div class="container">
 	<form role="form">
+		<input type="hidden" name="page" value="${criteria.page}">
+		<input type="hidden" name="perPageNum" value="${criteria.perPageNum}">
+
 		<div class="form-group">
 			<label for="no">No.</label>
 			<input type="text" class="form-control" name="no" id="no" value="${board.no}" readonly="readonly">

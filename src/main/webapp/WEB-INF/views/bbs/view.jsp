@@ -16,6 +16,8 @@
 <div class="container">
 	<form role="form">
 		<input type="hidden" name="no" value="${board.no}">
+		<input type="hidden" name="page" value="${criteria.page}">
+		<input type="hidden" name="perPageNum" value="${criteria.perPageNum}">
 	</form>
 
 	<div class="form-group">

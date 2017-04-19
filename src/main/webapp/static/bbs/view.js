@@ -17,6 +17,9 @@ $(document).ready(function () {
    });
 
     $("#btnList").on("click", function () {
-        self.location = "/bbs/list";
-    });
+        // history.go(-1);
+        formObj.attr("action", "/bbs/list");
+        formObj.attr("method", "GET");
+        formObj.submit();
+    })
 });

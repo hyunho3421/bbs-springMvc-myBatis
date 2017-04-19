@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -59,30 +60,10 @@ public class BoardController {
         return "/bbs/list";
     }
 
-    /**
-     * 페이징을 자바 스크립트로 처리하는 리스트 페이지
-     *
-     * @param cri
-     * @param model
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping(value = "/list_js_paging", method = RequestMethod.GET)
-    public String listGET_JS_Paging(Criteria cri, Model model) throws Exception {
-        logger.info("show all list .......");
-
-        PageMaker pageMaker = new PageMaker();
-        pageMaker.setCriteria(cri);
-        pageMaker.setTotalCount(boardService.count());
-
-        model.addAttribute("list", boardService.listPage(cri));
-        model.addAttribute("pageMaker", pageMaker);
-
-        return "/bbs/list_javascript_paging";
-    }
-
     @RequestMapping(value = "view", method = RequestMethod.GET)
-    public String viewGET(@RequestParam("no") int no, Model model) throws Exception {
+    public String viewGET(@RequestParam("no") int no,
+                          @ModelAttribute("criteria") Criteria criteria,
+                          Model model) throws Exception {
         logger.info("view no." + no + "........");
 
         model.addAttribute("board", boardService.read(no));
@@ -91,18 +72,24 @@ public class BoardController {
     }
 
     @RequestMapping(value = "remove", method = RequestMethod.POST)
-    public String removePOST(@RequestParam("no") int no, RedirectAttributes rttr) throws Exception {
+    public String removePOST(@RequestParam("no") int no,
+                             Criteria criteria,
+                             RedirectAttributes rttr) throws Exception {
         logger.info("remove no." + no + " ........");
 
         boardService.delete(no);
 
+        rttr.addAttribute("page", criteria.getPage());
+        rttr.addAttribute("perPageNum", criteria.getPerPageNum());
         rttr.addFlashAttribute("msg", "remove_success");
 
         return "redirect:/bbs/list";
     }
 
     @RequestMapping(value = "modify", method = RequestMethod.GET)
-    public String modifyGET(@RequestParam("no") int no, Model model) throws Exception{
+    public String modifyGET(@RequestParam("no") int no,
+                            @ModelAttribute("criteria") Criteria criteria,
+                            Model model) throws Exception{
         logger.info("modify no." + no + " ........");
 
         model.addAttribute("board", boardService.read(no));
@@ -111,12 +98,17 @@ public class BoardController {
     }
 
     @RequestMapping(value = "modify", method = RequestMethod.POST)
-    public String modifyPOST(Board board, RedirectAttributes rttr) throws Exception {
+    public String modifyPOST(Board board,
+                             Criteria criteria,
+                             RedirectAttributes rttr) throws Exception {
         logger.info("modify board ........");
         logger.info(board.toString());
 
         boardService.update(board);
+
         rttr.addFlashAttribute("msg", "success_modify");
+        rttr.addAttribute("page", criteria.getPage());
+        rttr.addAttribute("perPageNum", criteria.getPerPageNum());
 
         return "redirect:/bbs/list";
     }
