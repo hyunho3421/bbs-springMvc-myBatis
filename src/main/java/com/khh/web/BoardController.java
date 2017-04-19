@@ -59,6 +59,28 @@ public class BoardController {
         return "/bbs/list";
     }
 
+    /**
+     * 페이징을 자바 스크립트로 처리하는 리스트 페이지
+     *
+     * @param cri
+     * @param model
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/list_js_paging", method = RequestMethod.GET)
+    public String listGET_JS_Paging(Criteria cri, Model model) throws Exception {
+        logger.info("show all list .......");
+
+        PageMaker pageMaker = new PageMaker();
+        pageMaker.setCriteria(cri);
+        pageMaker.setTotalCount(boardService.count());
+
+        model.addAttribute("list", boardService.listPage(cri));
+        model.addAttribute("pageMaker", pageMaker);
+
+        return "/bbs/list_javascript_paging";
+    }
+
     @RequestMapping(value = "view", method = RequestMethod.GET)
     public String viewGET(@RequestParam("no") int no, Model model) throws Exception {
         logger.info("view no." + no + "........");

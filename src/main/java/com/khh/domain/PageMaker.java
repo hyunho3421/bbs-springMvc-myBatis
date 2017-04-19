@@ -1,6 +1,8 @@
 package com.khh.domain;
 
 import lombok.Data;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 /**
  * Created by hyunhokim on 2017. 4. 19..
@@ -15,6 +17,9 @@ public class PageMaker {
 
     private Criteria criteria;
 
+    //pagination 개수
+    private int displayPageNum = 10;
+
     public void setCriteria(Criteria criteria) {
         this.criteria = criteria;
     }
@@ -27,9 +32,9 @@ public class PageMaker {
 
     private void calcPage() {
 
-        endPage = (int) ( Math.ceil((double) criteria.getPage() / criteria.getPerPageNum()) * criteria.getPerPageNum() );
+        endPage = (int) ( Math.ceil((double) criteria.getPage() / displayPageNum) * displayPageNum );
 
-        startPage = (endPage - criteria.getPerPageNum()) + 1;
+        startPage = (endPage - displayPageNum) + 1;
 
         int tempEndPage = (int) ( Math.ceil((double) totalCount / criteria.getPerPageNum()) );
 
@@ -40,5 +45,15 @@ public class PageMaker {
         prev = startPage == 1 ? false : true;
 
         next = endPage * criteria.getPerPageNum() >= totalCount ? false : true;
+    }
+
+    public String makeQuery(int page) {
+        UriComponents uriComponents =
+                UriComponentsBuilder.newInstance()
+                .queryParam("page", page)
+                .queryParam("perPageNum", criteria.getPerPageNum())
+                .build();
+
+        return uriComponents.toUriString();
     }
 }
