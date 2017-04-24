@@ -3,6 +3,7 @@ package com.khh.web;
 import com.khh.domain.Board;
 import com.khh.domain.Criteria;
 import com.khh.domain.PageMaker;
+import com.khh.domain.SearchCriteria;
 import com.khh.service.BoardService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,7 +48,7 @@ public class BoardController {
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String listGET(Criteria cri, Model model) throws Exception {
+    public String listGET(@ModelAttribute SearchCriteria cri, Model model) throws Exception {
         logger.info("show all list .......");
 
         PageMaker pageMaker = new PageMaker();

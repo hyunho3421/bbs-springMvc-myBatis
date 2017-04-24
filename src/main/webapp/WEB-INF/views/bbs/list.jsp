@@ -14,6 +14,9 @@
 </head>
 <body>
 <div class="container">
+
+	<br />
+
 	<form role="form">
 		<input type="hidden" name="msg" value="${msg}">
 	</form>
@@ -62,9 +65,50 @@
 			</c:if>
 		</ul>
 	</div>
-	<div align="right">
+
+	<%--
+		n: 검색 조건이 없음
+		t: 제목으로 검색
+		c: 내용으로 검색
+		w: 작성자로 검색
+		tc: 제목이나 내용으로 검색
+		cw: 내용이나 작성자로 검색
+		tcw: 제목이나 내용 혹은 작성자로 검색
+	--%>
+
+	<div class="row" style="position: relative; left: 30%;">
+		<div class="form-group col-sm-2" style="padding-left: 5px; padding-right: 0px;">
+			<select class="form-control" name="searchType">
+				<option value="n" <c:out value="${criteria.searchType == null ? 'selected' : ''}"/> >
+					-----
+				</option>
+				<option <c:out value="${criteria.searchType eq 't' ? 'selected' : ''}"/> >
+					제목
+				</option>
+				<option <c:out value="${criteria.searchType eq 'c' ? 'selected ' : ''}"/> >
+					내용
+				</option>
+				<option <c:out value="${criteria.searchType eq 'w' ? 'selected ' : ''}"/> >
+					작성자
+				</option>
+				<option <c:out value="${criteria.searchType eq 'tc' ? 'selected ' : ''}"/> >
+					제목+내용
+				</option>
+				<option <c:out value="${criteria.searchType eq 'cw' ? 'selected ' : ''}"/> >
+					내용+작성자
+				</option>
+				<option <c:out value="${criteria.searchType eq 'tcw' ? 'selected ' : ''}"/> >
+					제목+내용+작성자
+				</option>
+			</select>
+		</div>
+		<div class="col-sm-2" style="padding-left: 5px; padding-right: 2px;">
+			<input class="form-control" type="text" name="keyword" id="keyword" value="${criteria.keyword}">
+		</div>
+		<button class="btn btn-default" id="btnSearch">검색</button>
 		<button class="btn btn-primary" type="submit" id="btnRegister">등록</button>
 	</div>
+	<!-- -->
 </div>
 
 <script src="/resources/js/jquery-3.2.1.js" ></script>
