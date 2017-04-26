@@ -2,6 +2,7 @@ package com.khh.repository;
 
 import com.khh.domain.Board;
 import com.khh.domain.Criteria;
+import com.khh.domain.SearchCriteria;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -69,5 +70,15 @@ public class BoardDAOImpl implements BoardDAO {
     @Override
     public List<Board> listPage(Criteria cri) throws Exception {
         return sqlSession.selectList(namespace + ".listPage", cri);
+    }
+
+    @Override
+    public List<Board> list(SearchCriteria cri) throws Exception {
+        return sqlSession.selectList(namespace + ".list" ,cri);
+    }
+
+    @Override
+    public int count(SearchCriteria cri) throws Exception {
+        return sqlSession.selectOne(namespace + ".count", cri);
     }
 }

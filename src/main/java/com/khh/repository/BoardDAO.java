@@ -2,6 +2,7 @@ package com.khh.repository;
 
 import com.khh.domain.Board;
 import com.khh.domain.Criteria;
+import com.khh.domain.SearchCriteria;
 
 import java.util.List;
 
@@ -28,4 +29,8 @@ public interface BoardDAO {
     void increaseViewCnt(int no) throws Exception;
 
     List<Board> listPage(Criteria cri) throws Exception;
+
+    List<Board> list(SearchCriteria cri) throws Exception;
+
+    int count(SearchCriteria cri) throws Exception;
 }

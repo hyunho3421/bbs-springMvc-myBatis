@@ -35,7 +35,7 @@
 			<c:forEach items="${list}" var="board">
 				<tr>
 					<td>${board.no}</td>
-					<td><a href="/bbs/view${pageMaker.makeQuery(pageMaker.criteria.page)}&no=${board.no}">${board.title}</a></td>
+					<td><a href="/bbs/view${pageMaker.makeSearchQuery(pageMaker.criteria.page)}&no=${board.no}">${board.title}</a></td>
 					<td>${board.writer}</td>
 					<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${board.reg_date}" /></td>
 					<td><span class="badge">${board.view_cnt}</span></td>
@@ -51,17 +51,17 @@
 	<div class="text-center">
 		<ul class="pagination">
 			<c:if test="${pageMaker.prev}">
-				<li><a href="/bbs/list${pageMaker.makeQuery(pageMaker.startPage - 1)}">&laquo;</a></li>
+				<li><a href="/bbs/list${pageMaker.makeSearchQuery(pageMaker.startPage - 1)}">&laquo;</a></li>
 			</c:if>
 
 			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
 				<li <c:out value="${pageMaker.criteria.page == idx?'class=active':''}" />>
-					<a href="/bbs/list${pageMaker.makeQuery(idx)}">${idx}</a>
+					<a href="/bbs/list${pageMaker.makeSearchQuery(idx)}">${idx}</a>
 				</li>
 			</c:forEach>
 
 			<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-				<li><a href="/bbs/list${pageMaker.makeQuery(pageMaker.endPage + 1)}">&raquo;</a></li>
+				<li><a href="/bbs/list${pageMaker.makeSearchQuery(pageMaker.endPage + 1)}">&raquo;</a></li>
 			</c:if>
 		</ul>
 	</div>
@@ -82,22 +82,22 @@
 				<option value="n" <c:out value="${criteria.searchType == null ? 'selected' : ''}"/> >
 					-----
 				</option>
-				<option <c:out value="${criteria.searchType eq 't' ? 'selected' : ''}"/> >
+				<option value="t" <c:out value="${criteria.searchType eq 't' ? 'selected' : ''}"/> >
 					제목
 				</option>
-				<option <c:out value="${criteria.searchType eq 'c' ? 'selected ' : ''}"/> >
+				<option value="c" <c:out value="${criteria.searchType eq 'c' ? 'selected ' : ''}"/> >
 					내용
 				</option>
-				<option <c:out value="${criteria.searchType eq 'w' ? 'selected ' : ''}"/> >
+				<option value="w" <c:out value="${criteria.searchType eq 'w' ? 'selected ' : ''}"/> >
 					작성자
 				</option>
-				<option <c:out value="${criteria.searchType eq 'tc' ? 'selected ' : ''}"/> >
+				<option value="tc" <c:out value="${criteria.searchType eq 'tc' ? 'selected ' : ''}"/> >
 					제목+내용
 				</option>
-				<option <c:out value="${criteria.searchType eq 'cw' ? 'selected ' : ''}"/> >
+				<option value="cw" <c:out value="${criteria.searchType eq 'cw' ? 'selected ' : ''}"/> >
 					내용+작성자
 				</option>
-				<option <c:out value="${criteria.searchType eq 'tcw' ? 'selected ' : ''}"/> >
+				<option value="tcw" <c:out value="${criteria.searchType eq 'tcw' ? 'selected ' : ''}"/> >
 					제목+내용+작성자
 				</option>
 			</select>

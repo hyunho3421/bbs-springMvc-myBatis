@@ -17,6 +17,11 @@
 <body>
 <div class="container">
 	<form role="form" method="post" action="/bbs/register">
+		<input type="hidden" name="page" value="${criteria.page}">
+		<input type="hidden" name="perPageNum" value="${criteria.perPageNum}">
+		<input type="hidden" name="searchType" value="${criteria.searchType}">
+		<input type="hidden" name="keyword" value="${criteria.keyword}">
+
 		<div class="form-group">
 			<label for="title">Title</label>
 			<input type="text" class="form-control" name="title" id="title">

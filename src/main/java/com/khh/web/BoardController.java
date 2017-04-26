@@ -28,7 +28,8 @@ public class BoardController {
     private BoardService boardService;
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public String registerGET() throws Exception {
+    public String registerGET(
+            @ModelAttribute("criteria") SearchCriteria criteria, Model model) throws Exception {
         logger.info("register get .......");
 
         return "/bbs/register";
@@ -48,14 +49,14 @@ public class BoardController {
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String listGET(@ModelAttribute SearchCriteria cri, Model model) throws Exception {
+    public String listGET(@ModelAttribute("criteria") SearchCriteria cri, Model model) throws Exception {
         logger.info("show all list .......");
 
         PageMaker pageMaker = new PageMaker();
         pageMaker.setCriteria(cri);
-        pageMaker.setTotalCount(boardService.count());
+        pageMaker.setTotalCount(boardService.count(cri));
 
-        model.addAttribute("list", boardService.listPage(cri));
+        model.addAttribute("list", boardService.list(cri));
         model.addAttribute("pageMaker", pageMaker);
 
         return "/bbs/list";
@@ -63,7 +64,7 @@ public class BoardController {
 
     @RequestMapping(value = "view", method = RequestMethod.GET)
     public String viewGET(@RequestParam("no") int no,
-                          @ModelAttribute("criteria") Criteria criteria,
+                          @ModelAttribute("criteria") SearchCriteria criteria,
                           Model model) throws Exception {
         logger.info("view no." + no + "........");
 
@@ -74,7 +75,7 @@ public class BoardController {
 
     @RequestMapping(value = "remove", method = RequestMethod.POST)
     public String removePOST(@RequestParam("no") int no,
-                             Criteria criteria,
+                             SearchCriteria criteria,
                              RedirectAttributes rttr) throws Exception {
         logger.info("remove no." + no + " ........");
 
@@ -82,6 +83,8 @@ public class BoardController {
 
         rttr.addAttribute("page", criteria.getPage());
         rttr.addAttribute("perPageNum", criteria.getPerPageNum());
+        rttr.addAttribute("searchType", criteria.getSearchType());
+        rttr.addAttribute("keyword", criteria.getKeyword());
         rttr.addFlashAttribute("msg", "remove_success");
 
         return "redirect:/bbs/list";
@@ -89,7 +92,7 @@ public class BoardController {
 
     @RequestMapping(value = "modify", method = RequestMethod.GET)
     public String modifyGET(@RequestParam("no") int no,
-                            @ModelAttribute("criteria") Criteria criteria,
+                            @ModelAttribute("criteria") SearchCriteria criteria,
                             Model model) throws Exception{
         logger.info("modify no." + no + " ........");
 
@@ -100,7 +103,7 @@ public class BoardController {
 
     @RequestMapping(value = "modify", method = RequestMethod.POST)
     public String modifyPOST(Board board,
-                             Criteria criteria,
+                             @ModelAttribute("criteria") SearchCriteria criteria,
                              RedirectAttributes rttr) throws Exception {
         logger.info("modify board ........");
         logger.info(board.toString());
@@ -110,6 +113,8 @@ public class BoardController {
         rttr.addFlashAttribute("msg", "success_modify");
         rttr.addAttribute("page", criteria.getPage());
         rttr.addAttribute("perPageNum", criteria.getPerPageNum());
+        rttr.addAttribute("searchType", criteria.getSearchType());
+        rttr.addAttribute("keyword", criteria.getKeyword());
 
         return "redirect:/bbs/list";
     }

@@ -2,6 +2,7 @@ package com.khh.service;
 
 import com.khh.domain.Board;
 import com.khh.domain.Criteria;
+import com.khh.domain.SearchCriteria;
 
 import java.util.List;
 
@@ -19,7 +20,9 @@ public interface BoardService {
 
     void update(Board board) throws Exception;
 
-    int count() throws Exception;
+    int count(SearchCriteria cri) throws Exception;
 
     List<Board> listPage(Criteria criteria) throws Exception;
+
+    List<Board> list(SearchCriteria criteria) throws Exception;
 }

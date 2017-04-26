@@ -56,4 +56,16 @@ public class PageMaker {
 
         return uriComponents.toUriString();
     }
+
+    public String makeSearchQuery(int page) {
+        UriComponents uriComponents =
+                UriComponentsBuilder.newInstance()
+                        .queryParam("page", page)
+                        .queryParam("perPageNum", criteria.getPerPageNum())
+                        .queryParam("searchType", ((SearchCriteria)criteria).getSearchType())
+                        .queryParam("keyword", ((SearchCriteria)criteria).getKeyword())
+                        .build();
+
+        return uriComponents.toUriString();
+    }
 }
