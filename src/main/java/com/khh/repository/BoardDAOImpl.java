@@ -33,7 +33,7 @@ public class BoardDAOImpl implements BoardDAO {
     }
 
     @Override
-    public void add(Board board) throws Exception {
+    public void create(Board board) throws Exception {
         sqlSession.insert(namespace + ".add", board);
     }
 

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.khh.mapper.ReplyMapper">
+    <select id="list" resultType="Reply">
+        SELECT * FROM reply where bno = #{bno} ORDER BY rno DESC
+    </select>
+
+    <insert id="create">
+        INSERT INTO reply (bno, replyText, replyer) VALUES (#{bno}, #{replyText}, #{replyer})
+    </insert>
+
+    <update id="update">
+        UPDATE reply SET replyText = #{replyText}, update_date = now() WHERE rno = #{rno}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM reply WHERE rno = #{rno}
+    </delete>
+
+    <select id="initAutoIncrement">
+        alter table reply auto_increment=1;
+    </select>
+
+    <delete id="deleteAll">
+        DELETE FROM reply
+    </delete>
+
+    <select id="count" resultType="int">
+        SELECT count(*) FROM reply
+    </select>
+</mapper>

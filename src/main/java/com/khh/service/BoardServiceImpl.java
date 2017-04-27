@@ -30,7 +30,7 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public void register(Board board) throws Exception {
-        boardDAO.add(board);
+        boardDAO.create(board);
     }
 
     @Override

@@ -37,7 +37,7 @@ public class BoardDAOTest {
     public void addAndReadTest() throws Exception {
         init();
 
-        boardDAO.add(board);
+        boardDAO.create(board);
 
         Board getBoard = boardDAO.read(1);
 
@@ -53,7 +53,7 @@ public class BoardDAOTest {
     public void deleteAndAddTest() throws Exception {
         init();
 
-        boardDAO.add(board);
+        boardDAO.create(board);
 
         assertThat(boardDAO.count(), is(1));
 
@@ -66,10 +66,10 @@ public class BoardDAOTest {
     public void listAllAndAddTest() throws Exception {
         init();
 
-        boardDAO.add(board);
-        boardDAO.add(board);
-        boardDAO.add(board);
-        boardDAO.add(board);
+        boardDAO.create(board);
+        boardDAO.create(board);
+        boardDAO.create(board);
+        boardDAO.create(board);
 
         assertThat(boardDAO.count(), is(4));
 
@@ -87,7 +87,7 @@ public class BoardDAOTest {
     public void updateAndAddTest() throws Exception {
         init();
 
-        boardDAO.add(board);
+        boardDAO.create(board);
 
         board.setNo(1);
         board.setTitle("수정 제목");
@@ -110,7 +110,7 @@ public class BoardDAOTest {
 
         int view_cnt;
 
-        boardDAO.add(board);
+        boardDAO.create(board);
         view_cnt = boardDAO.read(1).getView_cnt();
         assertThat(view_cnt, is(0));
 
@@ -137,7 +137,7 @@ public class BoardDAOTest {
 
         //페이지 리스트 테스트 하기위해서 게시글 41개 등록
         for (int i=1; i <= 40; i++) {
-            boardDAO.add(board);
+            boardDAO.create(board);
         }
 
         //첫번째 페이지 게시물 가져와서 비교
@@ -169,15 +169,6 @@ public class BoardDAOTest {
         assertThat(boardDAO.count(), is(0));
 
         boardDAO.initAutoIncrement();
-    }
-
-    @Test
-    public void test() {
-        int a = 11;
-        int b = 10;
-
-        System.out.println(Math.ceil((double)a/b));
-
     }
 
 }
