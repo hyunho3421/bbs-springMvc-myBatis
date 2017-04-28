@@ -21,12 +21,12 @@ public class ReplyServiceImpl implements ReplyService {
     }
 
     @Override
-    public void create(Reply reply) throws Exception {
+    public void register(Reply reply) throws Exception {
         replyDAO.create(reply);
     }
 
     @Override
-    public void update(Reply reply) throws Exception {
+    public void modify(Reply reply) throws Exception {
         replyDAO.update(reply);
     }
 

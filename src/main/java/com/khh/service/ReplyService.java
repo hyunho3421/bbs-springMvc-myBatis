@@ -10,9 +10,9 @@ import java.util.List;
 public interface ReplyService {
     List<Reply> list(int bno) throws Exception;
 
-    void create(Reply reply) throws Exception;
+    void register(Reply reply) throws Exception;
 
-    void update(Reply reply) throws Exception;
+    void modify(Reply reply) throws Exception;
 
     void delete(int rno) throws Exception;
 }
