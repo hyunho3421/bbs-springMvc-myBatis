@@ -7,6 +7,10 @@
         SELECT * FROM reply where bno = #{bno} ORDER BY rno DESC
     </select>
 
+    <select id="listPage" resultType="Reply">
+        SELECT * FROM reply WHERE bno = #{bno} ORDER BY rno DESC limit #{criteria.pageStart}, #{criteria.perPageNum}
+    </select>
+
     <insert id="create">
         INSERT INTO reply (bno, replyText, replyer) VALUES (#{bno}, #{replyText}, #{replyer})
     </insert>

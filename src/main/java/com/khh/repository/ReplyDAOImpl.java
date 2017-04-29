@@ -1,11 +1,14 @@
 package com.khh.repository;
 
+import com.khh.domain.Criteria;
 import com.khh.domain.Reply;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by hyunhokim on 2017. 4. 27..
@@ -21,6 +24,15 @@ public class ReplyDAOImpl implements ReplyDAO {
     @Override
     public List<Reply> list(int bno) throws Exception {
         return sqlSession.selectList(namespace + ".list", bno);
+    }
+
+    @Override
+    public List<Reply> listPage(int bno, Criteria criteria) {
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("bno", bno);
+        paramMap.put("criteria", criteria);
+
+        return sqlSession.selectList(namespace + ".listPage", paramMap);
     }
 
     @Override
@@ -51,5 +63,10 @@ public class ReplyDAOImpl implements ReplyDAO {
     @Override
     public int count() throws Exception {
         return sqlSession.selectOne(namespace + ".count");
+    }
+
+    @Override
+    public int count(int bno) throws Exception {
+        return sqlSession.selectOne(namespace + ".count", bno);
     }
 }

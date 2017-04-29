@@ -1,5 +1,6 @@
 package com.khh.repository;
 
+import com.khh.domain.Criteria;
 import com.khh.domain.Reply;
 
 import java.util.List;
@@ -9,6 +10,8 @@ import java.util.List;
  */
 public interface ReplyDAO {
     List<Reply> list(int bno) throws Exception;
+
+    List<Reply> listPage(int bno, Criteria criteria);
 
     void create(Reply reply) throws Exception;
 
@@ -21,4 +24,6 @@ public interface ReplyDAO {
     void deleteAll() throws Exception;
 
     int count() throws Exception;
+
+    int count(int bno) throws Exception;
 }

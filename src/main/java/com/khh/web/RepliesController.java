@@ -1,5 +1,7 @@
 package com.khh.web;
 
+import com.khh.domain.Criteria;
+import com.khh.domain.PageMaker;
 import com.khh.domain.Reply;
 import com.khh.service.ReplyService;
 import org.slf4j.Logger;
@@ -9,7 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by hyunhokim on 2017. 4. 27..
@@ -39,15 +43,32 @@ public class RepliesController {
         return entity;
     }
 
-    @RequestMapping(value = "/all/{bno}", method = RequestMethod.GET)
-    public ResponseEntity<List<Reply>> list(@PathVariable("bno") int bno) {
+    @RequestMapping(value = "/{bno}/{page}", method = RequestMethod.GET)
+    public ResponseEntity<Map<String, Object>> list(
+            @PathVariable("bno") int bno,
+            @PathVariable("page") int page) {
         logger.info("reply list .....");
 
-        ResponseEntity<List<Reply>> entity;
+        ResponseEntity<Map<String, Object>> entity;
 
         try {
-            entity = new ResponseEntity<>(
-                    replyService.list(bno), HttpStatus.OK);
+            Criteria criteria = new Criteria();
+            criteria.setPage(page);
+
+            PageMaker pageMaker = new PageMaker();
+            pageMaker.setCriteria(criteria);
+
+            Map<String, Object> map = new HashMap<>();
+            List<Reply> list = replyService.list(bno, criteria);
+
+            map.put("list", list);
+
+            int repltyCount = replyService.count(bno);
+            pageMaker.setTotalCount(repltyCount);
+
+            map.put("pageMaker", pageMaker);
+
+            entity = new ResponseEntity<>(map, HttpStatus.OK);
 
         } catch (Exception e) {
             e.printStackTrace();

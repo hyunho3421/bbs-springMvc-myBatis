@@ -1,5 +1,6 @@
 package com.khh.service;
 
+import com.khh.domain.Criteria;
 import com.khh.domain.Reply;
 import com.khh.repository.ReplyDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,8 @@ public class ReplyServiceImpl implements ReplyService {
     private ReplyDAO replyDAO;
 
     @Override
-    public List<Reply> list(int bno) throws Exception {
-        return replyDAO.list(bno);
+    public List<Reply> list(int bno, Criteria criteria) throws Exception {
+        return replyDAO.listPage(bno, criteria);
     }
 
     @Override
@@ -33,5 +34,10 @@ public class ReplyServiceImpl implements ReplyService {
     @Override
     public void delete(int rno) throws Exception {
         replyDAO.delete(rno);
+    }
+
+    @Override
+    public int count(int bno) throws Exception {
+        return replyDAO.count(bno);
     }
 }
