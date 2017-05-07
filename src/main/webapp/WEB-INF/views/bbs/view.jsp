@@ -50,6 +50,13 @@
 	<div>
 		<div id="replies">
 		</div>
+
+		<div class="text-center">
+			<ul class="pagination">
+
+			</ul>
+		</div>
+
 		<div class="well">
 			<div class="form-group">
 				<label for="replyer" class="control-label">Replyer</label>

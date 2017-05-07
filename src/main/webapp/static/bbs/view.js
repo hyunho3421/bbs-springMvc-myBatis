@@ -2,7 +2,7 @@
  * Created by hyunhokim on 2017. 4. 18..
  */
 $(document).ready(function () {
-    getRepliesList();
+    getRepliesList(1);
 
     var formObj = $("form[role='form']");
 
@@ -47,25 +47,34 @@ $(document).ready(function () {
                 if (result == 'SUCCESS') {
                     alert("등록 되었습니다.");
                     getRepliesList();
+
+                    $("#replyer").val("");
+                    $("#replyText").val("");
                 }
+
+                getRepliesList(1);
             }
         });
     });
 
+    $(".pagination").on("click", "li a", function () {
+        event.preventDefault();
+
+        var replyPage = $(this).attr("href");
+
+        getRepliesList(replyPage);
+    });
+
 });
 
-function getRepliesList() {
+function getRepliesList(page) {
     var bno = $("input[name=no]").val();
-    var page = $("input[name=page]").val();
+    var url = "/replies/"+bno+"/"+page;
 
-    $.getJSON("/replies/"+bno+"/"+page, function (data) {
-        console.log(data.list.length);
-
+    $.getJSON(url, function (data) {
         var str = "";
 
         $(data.list).each(function () {
-            var date = new Date(commonDate_YYYYMMDD(this.reg_date));
-
             str += "<div class='panel panel-default'>"
                     + "<div class='panel-heading' data-rno='" + this.rno + "'>"
                     + this.replyer + " (" + commonDate_YYYYMMDD(this.reg_date) + ")"
@@ -77,5 +86,26 @@ function getRepliesList() {
         });
 
         $("#replies").html(str);
+
+        printPaging(data.pageMaker);
     });
+}
+
+function printPaging(pageMaker) {
+    var str = "";
+
+    if(pageMaker.prev) {
+        str += "<li><a href='" + (pageMaker.startPage - 1) + "' > << </a></li>";
+    }
+
+    for (var i = pageMaker.startPage; i< pageMaker.endPage; i++) {
+        var strClass = pageMaker.criteria.page == i ? 'class=active' : '';
+        str += "<li " + strClass + "><a href='" + i + "'>" + i + "</a></li>"
+    }
+
+    if(pageMaker.next) {
+        str += "<li><a href='" + (pageMaker.endPage + 1) + "'> >> </a></li>";
+    }
+
+    $(".pagination").html(str);
 }
