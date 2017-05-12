@@ -69,6 +69,10 @@
         update board set view_cnt = view_cnt+1 where no = #{no}
     </update>
 
+    <update id="increaseReplyCnt">
+        update board set reply_cnt = reply_cnt+1 WHERE no = #{no}
+    </update>
+
     <select id="listPage" resultType="Board">
         <![CDATA[
           SELECT * FROM board WHERE no > 0 ORDER BY no DESC ,reg_date DESC

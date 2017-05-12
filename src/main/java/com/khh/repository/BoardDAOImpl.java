@@ -81,4 +81,9 @@ public class BoardDAOImpl implements BoardDAO {
     public int count(SearchCriteria cri) throws Exception {
         return sqlSession.selectOne(namespace + ".count", cri);
     }
+
+    @Override
+    public void increaseReplyCnt(int no) throws Exception {
+        sqlSession.update(namespace + ".increaseReplyCnt", no);
+    }
 }

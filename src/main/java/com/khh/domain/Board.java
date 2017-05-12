@@ -15,4 +15,5 @@ public class Board {
     private String writer;
     private Date reg_date;
     private int view_cnt;
+    private int reply_cnt;
 }
