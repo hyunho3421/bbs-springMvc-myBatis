@@ -46,7 +46,6 @@ $(document).ready(function () {
             success : function (result) {
                 if (result == 'SUCCESS') {
                     alert("등록 되었습니다.");
-                    getRepliesList();
 
                     $("#replyer").val("");
                     $("#replyText").val("");
