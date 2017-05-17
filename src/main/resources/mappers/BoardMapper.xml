@@ -92,4 +92,8 @@
           limit ${pageStart}, #{perPageNum}
         ]]>
     </select>
+
+    <insert id="addAttach">
+        INSERT INTO attach(fullName, bno) VALUES (#{fullName}, LAST_INSERT_ID())
+    </insert>
 </mapper>

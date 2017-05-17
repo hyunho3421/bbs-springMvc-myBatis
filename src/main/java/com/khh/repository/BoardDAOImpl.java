@@ -86,4 +86,9 @@ public class BoardDAOImpl implements BoardDAO {
     public void increaseReplyCnt(int no) throws Exception {
         sqlSession.update(namespace + ".increaseReplyCnt", no);
     }
+
+    @Override
+    public void addAttach(String fullName) throws Exception {
+        sqlSession.insert(namespace + ".addAttach", fullName);
+    }
 }

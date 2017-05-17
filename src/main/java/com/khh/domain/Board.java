@@ -16,4 +16,5 @@ public class Board {
     private Date reg_date;
     private int view_cnt;
     private int reply_cnt;
+    private String[] files;
 }

@@ -35,4 +35,6 @@ public interface BoardDAO {
     int count(SearchCriteria cri) throws Exception;
 
     void increaseReplyCnt(int no) throws Exception;
+
+    void addAttach(String fullName) throws Exception;
 }

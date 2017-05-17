@@ -4,9 +4,23 @@
 $(document).ready(function () {
    var formObj = $("form[role='form']");
 
-   $('#btnRegister').on("click", function () {
-      formObj.submit();
-   });
+   // $('#btnRegister').on("click", function () {
+   //    formObj.submit();
+   // });
+
+    $('#btnRegister').on("click", function () {
+        var that = $(formObj);
+
+        var str = "";
+
+        $(".uploadedList small").each(function (index) {
+           str += "<input type='hidden' name='files[" + index + "]' value='" + getImageLink($(this).data("src")) + "' />";
+        });
+
+        that.append(str);
+
+        formObj.submit();
+    });
 
    $("#btnList").on("click", function () {
       // self.location = "/bbs/list";
@@ -45,7 +59,8 @@ $(document).ready(function () {
 
                 if (checkImageType(data)) {
                     str = "<div><a href='/displayFile?fileName="+getImageLink(data)+"'>"
-                        + "<img src='/displayFile?fileName=" + getImageLink(data) + "' />"
+                        + "<img src='/displayFile?fileName=" + data + "' />"
+                        // + data + "</a><small data-src='" + getImageLink(data) + "'>X</small></div>";
                         + data + "</a><small data-src='" + data + "'>X</small></div>";
                 } else {
                     str = "<div><a href='/displayFile?fileName=" + data + "'>"
@@ -103,4 +118,32 @@ function getImageLink(fileName) {
     var end = fileName.substr(14);
 
     return front + end;
+}
+
+function getFileInfo(fullName) {
+    var fileName, imgsrc, getLink;
+
+    var fileLink;
+
+    if(checkImageType(fullName)) {
+        imgsrc = "/displayFile?fileName=" + fullName;
+        fileLink = fullName.substr(14);
+
+        var front = fullName.substr(0, 12);
+        var end = fullName.substr(14);
+
+        getLink = "/displayFile?fileName=" + front + end;
+    } else {
+        imgsrc = "/resources/dist/file.png";
+        fileLink = fullName.substr(12);
+        getLink = fileLink.substr(fileLink.indexOf("_") + 1);
+    }
+    fileName = fileLink.substr(fileLink.indexOf("_") + 1);
+
+    return {
+        fileName: fileName,
+        imgsrc: imgsrc,
+        getLink: getLink,
+        fullName: fullName
+    }
 }

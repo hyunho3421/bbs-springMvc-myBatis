@@ -6,6 +6,7 @@ import com.khh.domain.SearchCriteria;
 import com.khh.repository.BoardDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -28,9 +29,20 @@ public class BoardServiceImpl implements BoardService {
         return boardDAO.listAll();
     }
 
+    @Transactional
     @Override
     public void register(Board board) throws Exception {
         boardDAO.create(board);
+
+        String[] files = board.getFiles();
+
+        if(files == null) {
+            return;
+        }
+
+        for (String fileName : files) {
+            boardDAO.addAttach(fileName);
+        }
     }
 
     @Override
