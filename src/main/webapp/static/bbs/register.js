@@ -58,14 +58,41 @@ $(document).ready(function () {
                 var str = "";
 
                 if (checkImageType(data)) {
-                    str = "<div><a href='/displayFile?fileName="+getImageLink(data)+"'>"
-                        + "<img src='/displayFile?fileName=" + data + "' />"
-                        // + data + "</a><small data-src='" + getImageLink(data) + "'>X</small></div>";
-                        + data + "</a><small data-src='" + data + "'>X</small></div>";
+
+                    str = "<div class='col-sm-4'>"
+                            + "<div class='panel panel-group'>"
+                                + "<div class='panel panel-info'>"
+                                    + "<div class='panel-body text-center'>"
+                                        + "<img src='/displayFile?fileName=" + data + "' />"
+                                    + "</div>"
+                                    + "<div class='panel-heading'>"
+                                        + "<a href='/displayFile?fileName="+getImageLink(data)+"'>"
+                                        + getFullName(data) + "</a><small data-src='" + data + "'> X</small></div>";
+                                    + "</div>"
+                                + "</div>"
+                            + "</div>"
+                        + "</div>";
+
+                    //
+                    // str = "<div><a href='/displayFile?fileName="+getImageLink(data)+"'>"
+                    //     + "<img src='/displayFile?fileName=" + data + "' />"
+                    //     + data + "</a><small data-src='" + data + "'>X</small></div>";
                 } else {
-                    str = "<div><a href='/displayFile?fileName=" + data + "'>"
-                        + getOriginalName(data)
-                        + "</a><small data-src='" + data + "'> X</small></div>";
+
+                    str = "<div class='col-sm-4'>"
+                            + "<div class='panel panel-group'>"
+                                + "<div class='panel panel-info'>"
+                                    + "<div class='panel-body text-center'>"
+                                        + "<img src='/resources/img/default.gif' />"
+                                    + "</div>"
+                                    + "<div class='panel-heading'>"
+                                        + "<a href='/displayFile?fileName="+getImageLink(data)+"'>"
+                                        + getOriginalName(data) + "</a><small data-src='" + data + "'> X</small></div>";
+                                    + "</div>"
+                                + "</div>"
+                            + "</div>"
+                        + "</div>";
+
                 }
 
                 $(".uploadedList").append(str);
@@ -98,6 +125,7 @@ function checkImageType(fileName) {
     return fileName.match(pattern);
 }
 
+//파일
 function getOriginalName(fileName) {
     if(checkImageType(fileName)) {
         return;
@@ -118,6 +146,14 @@ function getImageLink(fileName) {
     var end = fileName.substr(14);
 
     return front + end;
+}
+
+//이미지
+function getFullName(fullName) {
+
+    var result = fullName.substr(14);
+
+    return result.substr(result.indexOf("_") + 1);
 }
 
 function getFileInfo(fullName) {

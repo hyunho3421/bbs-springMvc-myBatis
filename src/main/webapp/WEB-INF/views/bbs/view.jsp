@@ -39,6 +39,25 @@
 			<input type="text" class="form-control" name="writer" id="writer" readonly="readonly" value="${board.writer}">
 		</div>
 
+		<%--<div class="row">
+			<div class="col-sm-4">
+				<div class="panel panel-group">
+					<div class="panel panel-info">
+						<div class="panel-body">Panel Content</div>
+						<div class="panel-heading">Panel with panel-info class</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="panel panel-group">
+					<div class="panel panel-info">
+						<div class="panel-body">Panel Content</div>
+						<div class="panel-heading">Panel with panel-info class</div>
+					</div>
+				</div>
+			</div>
+		</div>--%>
+
 		<div align="right" class="list-group">
 			<button class="btn btn-warning" type="submit" id="btnModify">Modify</button>
 			<button class="btn btn-danger" type="submit" id="btnDelete">Delete</button>

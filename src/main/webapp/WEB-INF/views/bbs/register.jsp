@@ -51,7 +51,7 @@
 			<div class="fileDrop form-group">
 			</div>
 
-			<div class="uploadedList form-group">
+			<div class="uploadedList row">
 			</div>
 		</form>
 
