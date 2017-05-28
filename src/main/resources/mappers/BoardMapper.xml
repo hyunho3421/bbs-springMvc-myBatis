@@ -96,4 +96,8 @@
     <insert id="addAttach">
         INSERT INTO attach(fullName, bno) VALUES (#{fullName}, LAST_INSERT_ID())
     </insert>
+
+    <select id="getAttach" resultType="String">
+        SELECT fullname FROM attach WHERE bno = #{bno} ORDER BY reg_date
+    </select>
 </mapper>

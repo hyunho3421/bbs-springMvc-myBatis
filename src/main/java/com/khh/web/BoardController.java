@@ -10,11 +10,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 /**
  * Created by hyunhokim on 2017. 4. 14..
@@ -117,5 +116,12 @@ public class BoardController {
         rttr.addAttribute("keyword", criteria.getKeyword());
 
         return "redirect:/bbs/list";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getAttach/{bno}", method = RequestMethod.GET)
+    public List<String> getAttach(@PathVariable("bno") int bno) throws Exception {
+
+        return boardService.getAttach(bno);
     }
 }

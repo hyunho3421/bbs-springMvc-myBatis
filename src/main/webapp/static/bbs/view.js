@@ -2,6 +2,8 @@
  * Created by hyunhokim on 2017. 4. 18..
  */
 $(document).ready(function () {
+    getAttachFiles($("input[name=no]").val());
+
     getRepliesList(1);
 
     var formObj = $("form[role='form']");
@@ -101,10 +103,54 @@ function printPaging(pageMaker) {
         var strClass = pageMaker.criteria.page == i ? 'class=active' : '';
         str += "<li " + strClass + "><a href='" + i + "'>" + i + "</a></li>"
     }
-
+x
     if(pageMaker.next) {
         str += "<li><a href='" + (pageMaker.endPage + 1) + "'> >> </a></li>";
     }
 
     $(".pagination").html(str);
+}
+
+function getAttachFiles(bno) {
+    var str = "";
+
+    $.getJSON("/bbs/getAttach/"+bno, function (list) {
+
+        $(list).each(function () {
+
+            if(checkImageType(this)) {
+                str += "<div class='col-sm-4'>"
+                        + "<div class='panel panel-group'>"
+                            + "<div class='panel panel-info'>"
+                                + "<div class='panel-body text-center'>"
+                                    + "<img src='/displayFile?fileName=" + getThumnailImageLink(this) + "' />"
+                                + "</div>"
+                                + "<div class='panel-heading'>"
+                                    + "<a href='/displayFile?fileName=" + this + "'>"
+                                        + getFullName(this)
+                                    + "</a>"
+                                + "</div>"
+                            + "</div>"
+                        + "</div>"
+                    + "</div>";
+            } else {
+                str += "<div class='col-sm-4'>"
+                        + "<div class='panel panel-group'>"
+                            + "<div class='panel panel-info'>"
+                                + "<div class='panel-body text-center'>"
+                                    + "<img src='/resources/img/default.gif' />"
+                                + "</div>"
+                                + "<div class='panel-heading'>"
+                                    + "<a href='/displayFile?fileName=" + this + "'>"
+                                        + getOriginalName(this)
+                                    + "</a>"
+                                + "</div>"
+                            + "</div>"
+                        + "</div>"
+                    + "</div>";
+            }
+        });
+
+        $(".attachFiles").html(str);
+    });
 }

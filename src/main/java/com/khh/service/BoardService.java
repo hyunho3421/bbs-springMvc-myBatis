@@ -25,4 +25,6 @@ public interface BoardService {
     List<Board> listPage(Criteria criteria) throws Exception;
 
     List<Board> list(SearchCriteria criteria) throws Exception;
+
+    List<String> getAttach(int bno) throws Exception;
 }

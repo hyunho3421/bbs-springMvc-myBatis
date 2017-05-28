@@ -69,4 +69,9 @@ public class BoardServiceImpl implements BoardService {
     public List<Board> list(SearchCriteria criteria) throws Exception {
         return boardDAO.list(criteria);
     }
+
+    @Override
+    public List<String> getAttach(int bno) throws Exception {
+        return boardDAO.getAttach(bno);
+    }
 }

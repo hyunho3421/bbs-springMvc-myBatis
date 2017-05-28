@@ -58,6 +58,10 @@
 			</div>
 		</div>--%>
 
+		<div class="attachFiles row">
+
+		</div>
+
 		<div align="right" class="list-group">
 			<button class="btn btn-warning" type="submit" id="btnModify">Modify</button>
 			<button class="btn btn-danger" type="submit" id="btnDelete">Delete</button>

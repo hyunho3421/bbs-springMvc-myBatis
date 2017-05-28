@@ -37,4 +37,6 @@ public interface BoardDAO {
     void increaseReplyCnt(int no) throws Exception;
 
     void addAttach(String fullName) throws Exception;
+
+    List<String> getAttach(int bno) throws Exception;
 }

@@ -14,7 +14,11 @@ $(document).ready(function () {
         var str = "";
 
         $(".uploadedList small").each(function (index) {
-           str += "<input type='hidden' name='files[" + index + "]' value='" + getImageLink($(this).data("src")) + "' />";
+            if(checkImageType($(this).data("src"))) {
+                str += "<input type='hidden' name='files[" + index + "]' value='" + getImageLink($(this).data("src")) + "' />";
+            } else {
+                str += "<input type='hidden' name='files[" + index + "]' value='" + $(this).data("src") + "' />";
+            }
         });
 
         that.append(str);
@@ -67,7 +71,7 @@ $(document).ready(function () {
                                     + "</div>"
                                     + "<div class='panel-heading'>"
                                         + "<a href='/displayFile?fileName="+getImageLink(data)+"'>"
-                                        + getFullName(data) + "</a><small data-src='" + data + "'> X</small></div>";
+                                        + getFullName(data) + "</a><small data-src='" + data + "' style='cursor: pointer;'> X</small></div>";
                                     + "</div>"
                                 + "</div>"
                             + "</div>"
@@ -87,7 +91,7 @@ $(document).ready(function () {
                                     + "</div>"
                                     + "<div class='panel-heading'>"
                                         + "<a href='/displayFile?fileName="+getImageLink(data)+"'>"
-                                        + getOriginalName(data) + "</a><small data-src='" + data + "'> X</small></div>";
+                                        + getOriginalName(data) + "</a><small data-src='" + data + "' style='cursor: pointer;'> X</small></div>";
                                     + "</div>"
                                 + "</div>"
                             + "</div>"
@@ -112,7 +116,7 @@ $(document).ready(function () {
             dataType: "text",
             success: function (result) {
                 if (result == 'deleted') {
-                    that.parent("div").remove();
+                    that.closest(".col-sm-4").remove();
                 }
             }
         });
