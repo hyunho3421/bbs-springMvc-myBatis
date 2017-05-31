@@ -53,6 +53,18 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public void update(Board board) throws Exception {
         boardDAO.update(board);
+
+        boardDAO.deleteAttach(board.getNo());
+
+        String[] files = board.getFiles();
+
+        if(files == null) {
+            return;
+        }
+
+        for (String fileName : files) {
+            boardDAO.replaceAttach(fileName, board.getNo());
+        }
     }
 
     @Override

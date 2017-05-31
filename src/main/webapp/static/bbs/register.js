@@ -57,8 +57,6 @@ $(document).ready(function () {
             contentType: false,
             type: 'POST',
             success: function (data) {
-                alert(data);
-
                 var str = "";
 
                 if (checkImageType(data)) {
@@ -77,10 +75,6 @@ $(document).ready(function () {
                             + "</div>"
                         + "</div>";
 
-                    //
-                    // str = "<div><a href='/displayFile?fileName="+getImageLink(data)+"'>"
-                    //     + "<img src='/displayFile?fileName=" + data + "' />"
-                    //     + data + "</a><small data-src='" + data + "'>X</small></div>";
                 } else {
 
                     str = "<div class='col-sm-4'>"
@@ -158,32 +152,4 @@ function getFullName(fullName) {
     var result = fullName.substr(14);
 
     return result.substr(result.indexOf("_") + 1);
-}
-
-function getFileInfo(fullName) {
-    var fileName, imgsrc, getLink;
-
-    var fileLink;
-
-    if(checkImageType(fullName)) {
-        imgsrc = "/displayFile?fileName=" + fullName;
-        fileLink = fullName.substr(14);
-
-        var front = fullName.substr(0, 12);
-        var end = fullName.substr(14);
-
-        getLink = "/displayFile?fileName=" + front + end;
-    } else {
-        imgsrc = "/resources/dist/file.png";
-        fileLink = fullName.substr(12);
-        getLink = fileLink.substr(fileLink.indexOf("_") + 1);
-    }
-    fileName = fileLink.substr(fileLink.indexOf("_") + 1);
-
-    return {
-        fileName: fileName,
-        imgsrc: imgsrc,
-        getLink: getLink,
-        fullName: fullName
-    }
 }

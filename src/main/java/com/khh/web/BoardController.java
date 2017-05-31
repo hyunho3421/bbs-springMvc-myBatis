@@ -42,8 +42,6 @@ public class BoardController {
 
         boardService.register(board);
 
-        rttr.addFlashAttribute("msg", "register_success");
-
         return "redirect:/bbs/list";
     }
 
@@ -84,7 +82,6 @@ public class BoardController {
         rttr.addAttribute("perPageNum", criteria.getPerPageNum());
         rttr.addAttribute("searchType", criteria.getSearchType());
         rttr.addAttribute("keyword", criteria.getKeyword());
-        rttr.addFlashAttribute("msg", "remove_success");
 
         return "redirect:/bbs/list";
     }
@@ -109,7 +106,6 @@ public class BoardController {
 
         boardService.update(board);
 
-        rttr.addFlashAttribute("msg", "success_modify");
         rttr.addAttribute("page", criteria.getPage());
         rttr.addAttribute("perPageNum", criteria.getPerPageNum());
         rttr.addAttribute("searchType", criteria.getSearchType());

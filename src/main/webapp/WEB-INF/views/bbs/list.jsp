@@ -114,20 +114,5 @@
 <script src="/resources/js/jquery-3.2.1.js" ></script>
 <script src="/resources/js/bootstrap.js" ></script>
 <script src="/static/bbs/list.js"></script>
-<script>
-    var result = '${msg}';
-
-    if(result == 'register_success') {
-        alert("등록되었습니다.");
-    }
-
-    if(result == 'remove_success') {
-        alert("삭제 되었습니다.")
-    }
-
-    if(result == 'success_modify') {
-        alert("수정정되었습니다.")
-    }
-</script>
 </body>
 </html>

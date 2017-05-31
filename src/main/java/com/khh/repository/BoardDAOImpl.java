@@ -7,7 +7,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by hyunhokim on 2017. 4. 13..
@@ -93,5 +95,19 @@ public class BoardDAOImpl implements BoardDAO {
     @Override
     public List<String> getAttach(int bno) throws Exception {
         return sqlSession.selectList(namespace + ".getAttach", bno);
+    }
+
+    @Override
+    public void replaceAttach(String fullName, int bno) throws Exception {
+        Map<String, Object> paramMap = new HashMap<String, Object>();
+        paramMap.put("fullName", fullName);
+        paramMap.put("bno", bno);
+
+        sqlSession.insert(namespace + ".replaceAttach", paramMap);
+    }
+
+    @Override
+    public void deleteAttach(int bno) throws Exception {
+        sqlSession.delete(namespace + ".deleteAttach", bno);
     }
 }

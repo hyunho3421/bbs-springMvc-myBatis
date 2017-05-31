@@ -100,4 +100,12 @@
     <select id="getAttach" resultType="String">
         SELECT fullname FROM attach WHERE bno = #{bno} ORDER BY reg_date
     </select>
+
+    <insert id="replaceAttach">
+        INSERT INTO attach(fullName, bno) VALUES (#{fullName}, #{bno})
+    </insert>
+
+    <delete id="deleteAttach">
+        DELETE FROM attach WHERE bno = #{bno}
+    </delete>
 </mapper>
