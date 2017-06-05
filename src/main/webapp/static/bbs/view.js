@@ -15,9 +15,25 @@ $(document).ready(function () {
     });
 
     $("#btnDelete").on("click", function () {
+        // formObj.attr("action", "/bbs/remove");
+        // formObj.attr("method", "POST");
+        // formObj.submit();
+
+        var arr = [];
+        $(".attachFiles .panel-group").each(function (index) {
+           arr.push($(this).attr("data-src"));
+        });
+
+        if(arr.length > 0) {
+            $.post("/deleteAllFiles", {files:arr}, function () {
+
+            });
+        }
+
         formObj.attr("action", "/bbs/remove");
         formObj.attr("method", "POST");
         formObj.submit();
+
     });
 
     $("#btnList").on("click", function () {
@@ -103,7 +119,7 @@ function printPaging(pageMaker) {
         var strClass = pageMaker.criteria.page == i ? 'class=active' : '';
         str += "<li " + strClass + "><a href='" + i + "'>" + i + "</a></li>"
     }
-x
+
     if(pageMaker.next) {
         str += "<li><a href='" + (pageMaker.endPage + 1) + "'> >> </a></li>";
     }
@@ -120,7 +136,7 @@ function getAttachFiles(bno) {
 
             if(checkImageType(this)) {
                 str += "<div class='col-sm-4'>"
-                        + "<div class='panel panel-group'>"
+                        + "<div class='panel panel-group' data-src='" + this + "'>"
                             + "<div class='panel panel-info'>"
                                 + "<div class='panel-body text-center'>"
                                     + "<img src='/displayFile?fileName=" + getThumnailImageLink(this) + "' />"
