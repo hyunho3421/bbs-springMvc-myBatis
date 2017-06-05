@@ -122,12 +122,14 @@ public class UploadController {
             MediaType mType = MediaUtils.getMediaType(formatName);
 
             if(mType != null) {
+                //thumbnail 삭제
                 String front = fileName.substring(0, 12);
-                String end = fileName.substring(14);
+                String end = fileName.substring(12);
 
-                new File(uploadPath + (front + end).replace('/', File.separatorChar)).delete();
+                new File(uploadPath + (front + "s_" + end).replace('/', File.separatorChar)).delete();
             }
 
+            //원본 삭제
             new File(uploadPath + fileName.replace('/', File.separatorChar)).delete();
         }
 
