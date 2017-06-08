@@ -18,7 +18,9 @@
 	<br />
 
 	<form role="form">
-		<input type="hidden" name="msg" value="${msg}">
+		<%--<input type="hidden" name="msg" value="${msg}">--%>
+		<input type="hidden" id="page" value="${criteria.page}" >
+		<input type="hidden" id="perPageNum" value="${criteria.perPageNum}">
 	</form>
 
 	<table class="table table-striped table-bordered">
