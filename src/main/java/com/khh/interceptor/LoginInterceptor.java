@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
 /**
  * Created by hyunhokim on 2017. 6. 5..
  */
@@ -44,7 +45,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 
             Object dest = session.getAttribute("dest");
 
-            response.sendRedirect(dest != null ? (String)dest : "/user/login");
+            response.sendRedirect(dest != null ? (String)dest : "/bbs/list");
         }
     }
 }

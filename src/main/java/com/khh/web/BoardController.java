@@ -23,6 +23,7 @@ import java.util.List;
 @RequestMapping("/bbs/*")
 public class BoardController {
     private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
+    private static final String root = "bbs";
 
     @Autowired
     private BoardService boardService;
@@ -31,6 +32,7 @@ public class BoardController {
     public String registerGET(
             @ModelAttribute("criteria") SearchCriteria criteria, Model model) throws Exception {
         logger.info("register get .......");
+        model.addAttribute("root", root);
 
         return "/bbs/register";
     }
@@ -56,6 +58,7 @@ public class BoardController {
 
         model.addAttribute("list", boardService.list(cri));
         model.addAttribute("pageMaker", pageMaker);
+        model.addAttribute("root", root);
 
         return "/bbs/list";
     }
@@ -67,6 +70,7 @@ public class BoardController {
         logger.info("view no." + no + "........");
 
         model.addAttribute("board", boardService.read(no));
+        model.addAttribute("root", root);
 
         return "/bbs/view";
     }
@@ -94,6 +98,7 @@ public class BoardController {
         logger.info("modify no." + no + " ........");
 
         model.addAttribute("board", boardService.read(no));
+        model.addAttribute("root", root);
 
         return "/bbs/modify";
     }

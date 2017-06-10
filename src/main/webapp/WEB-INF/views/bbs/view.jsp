@@ -1,6 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page session="false" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
@@ -44,8 +43,10 @@
 		</div>
 
 		<div align="right" class="list-group">
-			<button class="btn btn-warning" type="submit" id="btnModify">Modify</button>
-			<button class="btn btn-danger" type="submit" id="btnDelete">Delete</button>
+			<c:if test="${login.id eq board.writer}">
+				<button class="btn btn-warning" type="submit" id="btnModify">Modify</button>
+				<button class="btn btn-danger" type="submit" id="btnDelete">Delete</button>
+			</c:if>
 			<button class="btn btn-primary" type="submit" id="btnList">List</button>
 		</div>
 	</div>

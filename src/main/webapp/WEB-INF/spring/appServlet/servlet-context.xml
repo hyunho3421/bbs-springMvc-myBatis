@@ -50,8 +50,11 @@
 
 		<interceptor>
 			<mapping path="/bbs/register"/>
+			<mapping path="/bbs/modify" />
+			<mapping path="/bbs/remove" />
 			<beans:ref bean="authInterceptor"/>
 		</interceptor>
 	</interceptors>
+
 
 </beans:beans>

@@ -1,6 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page session="false" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
@@ -14,11 +13,11 @@
 </head>
 <body>
 <div class="container">
+	<jsp:include page="../header.jsp" />
 
 	<br />
 
 	<form role="form">
-		<%--<input type="hidden" name="msg" value="${msg}">--%>
 		<input type="hidden" id="page" value="${criteria.page}" >
 		<input type="hidden" id="perPageNum" value="${criteria.perPageNum}">
 	</form>

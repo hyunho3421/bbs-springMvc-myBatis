@@ -1,5 +1,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("UTF-8");
@@ -45,7 +44,7 @@
 
 			<div class="form-group">
 				<label for="writer">Writer</label>
-				<input type="text" class="form-control" name="writer" id="writer">
+				<input type="text" class="form-control" name="writer" id="writer" value="${login.id}" readonly>
 			</div>
 
 			<div class="fileDrop form-group">
