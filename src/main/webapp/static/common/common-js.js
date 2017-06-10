@@ -55,3 +55,16 @@ function getThumnailImageLink(fileName) {
 
     return front + "s_" + end;
 }
+
+//로그 아웃
+function logout() {
+    $.ajax({
+        url: "/user/logout",
+        type: "GET",
+        success: function (result) {
+            if (result == 'logout_success') {
+                $(".navbar-right").html('<li><a href="/user/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>');
+            }
+        }
+    });
+}

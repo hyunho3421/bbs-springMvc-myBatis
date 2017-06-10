@@ -115,5 +115,6 @@
 <script src="/resources/js/jquery-3.2.1.js" ></script>
 <script src="/resources/js/bootstrap.js" ></script>
 <script src="/static/bbs/list.js"></script>
+<script src="/static/common/common-js.js"></script>
 </body>
 </html>
