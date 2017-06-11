@@ -22,6 +22,8 @@
 </head>
 <body>
 <div class="container">
+	<jsp:include page="../header.jsp" />
+
 	<br />
 
 	<div class="well">
@@ -63,6 +65,7 @@
 
 <script src="/resources/js/jquery-3.2.1.js" ></script>
 <script src="/resources/js/bootstrap.js" ></script>
+<script src="/static/common/common-js.js"></script>
 <script src="/static/bbs/register.js" ></script>
 </body>
 </html>

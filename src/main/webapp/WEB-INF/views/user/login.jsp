@@ -26,18 +26,19 @@
                 <label for="password">Password:</label>
                 <input type="password" class="form-control" id="password" name="password">
             </div>
-        </form>
 
-        <div class="row">
-            <div class="col-md-4 text-left">
-                <div class="checkbox">
-                    <label><input type="checkbox"> Remember me</label>
+
+            <div class="row">
+                <div class="col-md-4 text-left">
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="useCookie"> Remember me</label>
+                    </div>
+                </div>
+                <div class="col-md-8 text-right">
+                    <button class="btn btn-default" id="btnLogin">Sign In</button>
                 </div>
             </div>
-            <div class="col-md-8 text-right">
-                <button class="btn btn-default" id="btnLogin">Sign In</button>
-            </div>
-        </div>
+        </form>
     </div>
 </div>
 

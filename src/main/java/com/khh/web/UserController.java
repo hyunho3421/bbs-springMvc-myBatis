@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 
 /**
  * Created by hyunhokim on 2017. 6. 5..
@@ -41,6 +42,14 @@ public class UserController {
         }
 
         model.addAttribute("user", user);
+
+        if (dto.isUseCookie()) {
+            int amount = 60 * 60 * 24 * 7;
+
+            Date sessionLimit = new Date(System.currentTimeMillis() + (1000 * amount));
+
+            userService.keepLogin(user.getId(), session.getId(), sessionLimit);
+        }
 
         return "/user/login";
     }

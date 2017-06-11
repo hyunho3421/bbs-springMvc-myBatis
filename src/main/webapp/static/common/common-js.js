@@ -63,7 +63,12 @@ function logout() {
         type: "GET",
         success: function (result) {
             if (result == 'logout_success') {
-                $(".navbar-right").html('<li><a href="/user/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>');
+
+                if (location.pathname == '/bbs/list') {
+                    $(".navbar-right").html('<li><a href="/user/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>');
+                } else {
+                    location.reload();
+                }
             }
         }
     });

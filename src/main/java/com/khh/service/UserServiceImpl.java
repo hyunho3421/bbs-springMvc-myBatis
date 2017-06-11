@@ -6,6 +6,8 @@ import com.khh.repository.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 /**
  * Created by hyunhokim on 2017. 6. 5..
  */
@@ -17,5 +19,15 @@ public class UserServiceImpl implements UserService{
     @Override
     public User login(LoginDTO dto) throws Exception {
         return userDAO.login(dto);
+    }
+
+    @Override
+    public void keepLogin(String id, String sessionId, Date next) {
+        userDAO.keepLogin(id, sessionId, next);
+    }
+
+    @Override
+    public User checkUserWithSessionKey(String value) {
+        return userDAO.checkUserWithSessionKey(value);
     }
 }

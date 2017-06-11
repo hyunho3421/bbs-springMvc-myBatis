@@ -24,6 +24,8 @@
 </head>
 <body>
 <div class="container">
+	<jsp:include page="../header.jsp" />
+
 	<br />
 	<div class="well">
 

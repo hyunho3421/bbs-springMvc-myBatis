@@ -49,6 +49,7 @@
 		</interceptor>
 
 		<interceptor>
+			<mapping path="/bbs/list" />
 			<mapping path="/bbs/register"/>
 			<mapping path="/bbs/modify" />
 			<mapping path="/bbs/remove" />

@@ -48,7 +48,7 @@ public class BoardController {
         return "redirect:/bbs/list";
     }
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @RequestMapping(value = {"/list"}, method = RequestMethod.GET)
     public String listGET(@ModelAttribute("criteria") SearchCriteria cri, Model model) throws Exception {
         logger.info("show all list .......");
 
@@ -68,6 +68,7 @@ public class BoardController {
                           @ModelAttribute("criteria") SearchCriteria criteria,
                           Model model) throws Exception {
         logger.info("view no." + no + "........");
+        //TODO: view count 증가기능 추가
 
         model.addAttribute("board", boardService.read(no));
         model.addAttribute("root", root);
