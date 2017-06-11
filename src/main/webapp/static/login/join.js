@@ -18,9 +18,11 @@ $(document).ready(function () {
 
    $("#btnList").on("click", function () {
 
-       formObj.attr("method", "GET");
-       formObj.attr("action", "/bbs/list");
-       formObj.submit();
+
+       location.href="/bbs/list";
+       // formObj.attr("method", "GET");
+       // formObj.attr("action", "/bbs/list");
+       // formObj.submit();
    });
 });
 

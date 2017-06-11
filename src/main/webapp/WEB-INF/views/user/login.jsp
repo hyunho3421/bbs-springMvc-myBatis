@@ -1,6 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page session="false" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
@@ -31,7 +30,7 @@
             <div class="row">
                 <div class="col-md-4 text-left">
                     <div class="checkbox">
-                        <label><input type="checkbox" name="useCookie"> Remember me</label>
+                        <label><input type="checkbox" name="useCookie"> Remember me &nbsp;/&nbsp; <a href="/user/join">join us</a></label>
                     </div>
                 </div>
                 <div class="col-md-8 text-right">
@@ -40,6 +39,7 @@
             </div>
         </form>
     </div>
+
 </div>
 
 <script src="/resources/js/jquery-3.2.1.js" ></script>
