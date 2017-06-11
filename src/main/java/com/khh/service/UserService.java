@@ -14,4 +14,8 @@ public interface UserService {
     void keepLogin(String id, String sessionId, Date next);
 
     User checkUserWithSessionKey(String value);
+
+    void joinUser(User user);
+
+    User checkExistID(String id);
 }

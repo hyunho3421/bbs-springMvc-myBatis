@@ -30,4 +30,14 @@ public class UserServiceImpl implements UserService{
     public User checkUserWithSessionKey(String value) {
         return userDAO.checkUserWithSessionKey(value);
     }
+
+    @Override
+    public void joinUser(User user) {
+        userDAO.joinUser(user);
+    }
+
+    @Override
+    public User checkExistID(String id) {
+        return userDAO.checkExistID(id);
+    }
 }

@@ -14,4 +14,12 @@
     <select id="checkUserWithSessionKey" resultType="User">
         SELECT * FROM user WHERE sessionKey = #{value} and sessionlimit > now()
     </select>
+
+    <insert id="joinUser">
+        INSERT INTO user(id, password, name) VALUES (#{id}, #{password}, #{name});
+    </insert>
+
+    <select id="checkExistID" resultType="User">
+        SELECT * FROM user WHERE id = #{id}
+    </select>
 </mapper>
