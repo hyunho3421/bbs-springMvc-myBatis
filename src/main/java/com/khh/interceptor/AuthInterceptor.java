@@ -31,8 +31,6 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        HttpSession session = request.getSession();
-
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         System.out.println(authentication.getName());
 
@@ -56,55 +54,11 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
                 if (!board.getWriter().equals(authentication.getName())) {
                     response.sendRedirect("/bbs/denied");
                 }
-//                response.sendRedirect("/bbs/denied");
             }
         }
 
         return true;
-//
-//        if(session.getAttribute("login") == null) {
-//            logger.info("current user is not logined");
-//
-//            saveDest(request);
-//
-//            Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
-//
-//            if (loginCookie != null) {
-//                User user = userService.checkUserWithSessionKey(loginCookie.getValue());
-//
-//                logger.info("User" + user.toString());
-//
-//                if(user != null) {
-//                    session.setAttribute("login", user);
-//                    return true;
-//                }
-//            }
-//
-//            if(request.getRequestURI().equals("/bbs/list")) {
-//                return request.getRequestURI().equals("/bbs/list");
-//            }
-//
-//            response.sendRedirect("/user/login");
-//            return false;
-//        }
-//
-//        return true;
+
     }
 
-    private void saveDest(HttpServletRequest request) {
-        String uri = request.getRequestURI();
-
-        String query = request.getQueryString();
-
-        if (query == null || query.equals("null")) {
-            query = "";
-        } else {
-            query = "?" + query;
-        }
-
-        if (request.getMethod().equals("GET")) {
-            logger.info("dest: " + uri + query);
-            request.getSession().setAttribute("dest", uri + query);
-        }
-    }
 }
