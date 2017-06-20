@@ -70,36 +70,6 @@ public class UserController {
         return new ResponseEntity<String>("logout_success", HttpStatus.OK);
     }
 
-//    @ResponseBody
-//    @RequestMapping(value = "/logout", method = RequestMethod.GET)
-//    public ResponseEntity<String> logoutGET(
-//            HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
-//
-//        Object obj = session.getAttribute("login");
-//
-//        if(obj != null) {
-//            User user = (User) obj;
-//
-//            //세션 삭제
-//            session.removeAttribute("login");
-//            session.invalidate();
-//
-//            //쿠키 삭제
-//            Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
-//
-//            if (loginCookie != null) {
-//                loginCookie.setValue("");
-//                loginCookie.setPath("/");
-//                loginCookie.setMaxAge(0);
-//                response.addCookie(loginCookie);
-//            }
-//
-//            return new ResponseEntity<String>("logout_success", HttpStatus.OK);
-//        }
-//
-//        return new ResponseEntity<String>("fail", HttpStatus.BAD_REQUEST);
-//    }
-
     @RequestMapping(value = "/join", method = RequestMethod.GET)
     public String joinGET(Model model) throws Exception {
 
