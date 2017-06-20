@@ -68,7 +68,6 @@ public class BoardController {
                           @ModelAttribute("criteria") SearchCriteria criteria,
                           Model model) throws Exception {
         logger.info("view no." + no + "........");
-        //TODO: view count 증가기능 추가
 
         model.addAttribute("board", boardService.read(no));
         model.addAttribute("root", root);
@@ -126,5 +125,11 @@ public class BoardController {
     public List<String> getAttach(@PathVariable("bno") int bno) throws Exception {
 
         return boardService.getAttach(bno);
+    }
+
+    @RequestMapping(value = "/denied", method = RequestMethod.GET)
+    public String deniedGET(Model model) throws Exception {
+
+        return "/bbs/denied";
     }
 }

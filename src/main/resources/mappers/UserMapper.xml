@@ -22,4 +22,8 @@
     <select id="checkExistID" resultType="User">
         SELECT * FROM user WHERE id = #{id}
     </select>
+
+    <select id="getUserByID" resultType="User">
+        SELECT * FROM user WHERE id = #{id}
+    </select>
 </mapper>

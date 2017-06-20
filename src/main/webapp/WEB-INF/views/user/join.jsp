@@ -18,6 +18,8 @@
 
     <div class="well">
         <form role="form">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
             <div class="form-group">
                 <label for="id">ID:</label>
                 <input type="text" class="form-control" name="id" id="id">

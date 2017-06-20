@@ -16,7 +16,7 @@
     <br />
 
     <div class="well">
-        <form role="form">
+        <form role="form" action="/j_spring_security_check">
             <div class="form-group">
                 <label for="id">ID:</label>
                 <input type="text" class="form-control" id="id" name="id">
@@ -37,6 +37,8 @@
                     <button class="btn btn-default" id="btnLogin">Sign In</button>
                 </div>
             </div>
+
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
         </form>
     </div>
 

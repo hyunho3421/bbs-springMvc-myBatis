@@ -36,21 +36,16 @@
 		<beans:constructor-arg value="/Users/hyunhokim/Documents/dev/study"></beans:constructor-arg>
 	</beans:bean>
 
-	<beans:bean id="loginInterceptor" class="com.khh.interceptor.LoginInterceptor">
-	</beans:bean>
-
 	<beans:bean id="authInterceptor" class="com.khh.interceptor.AuthInterceptor">
 	</beans:bean>
 
 	<interceptors>
-		<interceptor>
-			<mapping path="/user/loginPost"/>
-			<beans:ref bean="loginInterceptor" />
-		</interceptor>
+		<!--<interceptor>-->
+			<!--<mapping path="/user/loginPost"/>-->
+			<!--<beans:ref bean="loginInterceptor" />-->
+		<!--</interceptor>-->
 
 		<interceptor>
-			<mapping path="/bbs/list" />
-			<mapping path="/bbs/register"/>
 			<mapping path="/bbs/modify" />
 			<mapping path="/bbs/remove" />
 			<beans:ref bean="authInterceptor"/>

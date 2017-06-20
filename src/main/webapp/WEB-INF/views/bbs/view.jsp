@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -13,6 +14,8 @@
 </head>
 <body>
 <div class="container">
+	<jsp:include page="../header.jsp" />
+
 	<br />
 	<div class="well">
 		<form role="form">
@@ -21,6 +24,7 @@
 			<input type="hidden" name="perPageNum" value="${criteria.perPageNum}">
 			<input type="hidden" name="searchType" value="${criteria.searchType}">
 			<input type="hidden" name="keyword" value="${criteria.keyword}">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		</form>
 
 		<div class="form-group">
@@ -43,13 +47,19 @@
 		</div>
 
 		<div align="right" class="list-group">
-			<c:if test="${login.id eq board.writer}">
-				<button class="btn btn-warning" type="submit" id="btnModify">Modify</button>
-				<button class="btn btn-danger" type="submit" id="btnDelete">Delete</button>
-			</c:if>
+			<sec:authorize access="isAuthenticated()">
+				<sec:authentication property="principal.username" var="loginId"></sec:authentication>
+
+				<c:if test="${board.writer eq loginId}">
+					<button class="btn btn-warning" type="submit" id="btnModify">Modify</button>
+					<button class="btn btn-danger" type="submit" id="btnDelete">Delete</button>
+				</c:if>
+			</sec:authorize>
+
 			<button class="btn btn-primary" type="submit" id="btnList">List</button>
 		</div>
 	</div>
+
 
 	<!-- replies -->
 	<div>

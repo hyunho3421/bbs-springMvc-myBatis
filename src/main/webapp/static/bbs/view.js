@@ -38,6 +38,8 @@ $(document).ready(function () {
 
     $("#btnList").on("click", function () {
         // history.go(-1);
+        $("input[name=no]").remove();
+
         formObj.attr("action", "/bbs/list");
         formObj.attr("method", "GET");
         formObj.submit();

@@ -18,4 +18,6 @@ public interface UserService {
     void joinUser(User user);
 
     User checkExistID(String id);
+
+    User getUserByID(String id);
 }

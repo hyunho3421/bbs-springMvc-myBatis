@@ -49,4 +49,9 @@ public class UserDAOImpl implements UserDAO{
     public User checkExistID(String id) {
         return session.selectOne(namespace + ".checkExistID", id);
     }
+
+    @Override
+    public User getUserByID(String id) {
+        return session.selectOne(namespace + ".getUserByID", id);
+    }
 }

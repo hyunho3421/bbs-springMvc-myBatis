@@ -58,9 +58,12 @@ function getThumnailImageLink(fileName) {
 
 //로그 아웃
 function logout() {
+    var formObj = $("#logout");
+
     $.ajax({
-        url: "/user/logout",
-        type: "GET",
+        url: "/logout",
+        type: "POST",
+        data: formObj.serialize(),
         success: function (result) {
             if (result == 'logout_success') {
 

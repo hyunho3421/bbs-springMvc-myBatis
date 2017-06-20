@@ -40,4 +40,9 @@ public class UserServiceImpl implements UserService{
     public User checkExistID(String id) {
         return userDAO.checkExistID(id);
     }
+
+    @Override
+    public User getUserByID(String id) {
+        return userDAO.getUserByID(id);
+    }
 }

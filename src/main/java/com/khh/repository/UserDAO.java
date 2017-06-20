@@ -18,4 +18,6 @@ public interface UserDAO {
     void joinUser(User user);
 
     User checkExistID(String id);
+
+    User getUserByID(String id);
 }
