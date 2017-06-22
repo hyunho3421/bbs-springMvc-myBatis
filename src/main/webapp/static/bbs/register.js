@@ -48,9 +48,10 @@ $(document).ready(function () {
         var formData = new FormData();
 
         formData.append("file", file);
+        var csrf = "?" + $("#csrf").attr("name") + "=" + $("#csrf").val();
 
         $.ajax({
-            url: '/uploadAjax',
+            url: '/uploadAjax' + csrf,
             data: formData,
             dataType: 'text',
             processData: false,

@@ -241,6 +241,7 @@
 
 	</dependencies>
     <build>
+		<finalName>web</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-eclipse-plugin</artifactId>
