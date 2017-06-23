@@ -3,10 +3,7 @@
  */
 $(document).ready(function () {
    var formObj = $("form[role='form']");
-
-   // $('#btnRegister').on("click", function () {
-   //    formObj.submit();
-   // });
+   var csrf = "?" + $("#csrf").attr("name") + "=" + $("#csrf").val();
 
     $('#btnRegister').on("click", function () {
         var that = $(formObj);
@@ -48,7 +45,6 @@ $(document).ready(function () {
         var formData = new FormData();
 
         formData.append("file", file);
-        var csrf = "?" + $("#csrf").attr("name") + "=" + $("#csrf").val();
 
         $.ajax({
             url: '/uploadAjax' + csrf,
@@ -103,7 +99,7 @@ $(document).ready(function () {
         var that = $(this);
 
         $.ajax({
-            url: "/deleteFile",
+            url: "/deleteFile" + csrf,
             type: "POST",
             data: {
                 fileName: $(this).attr("data-src")

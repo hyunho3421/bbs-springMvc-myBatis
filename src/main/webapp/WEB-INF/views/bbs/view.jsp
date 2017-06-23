@@ -24,7 +24,7 @@
 			<input type="hidden" name="perPageNum" value="${criteria.perPageNum}">
 			<input type="hidden" name="searchType" value="${criteria.searchType}">
 			<input type="hidden" name="keyword" value="${criteria.keyword}">
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrf" />
 		</form>
 
 		<div class="form-group">
@@ -72,19 +72,22 @@
 			</ul>
 		</div>
 
-		<div class="well">
-			<div class="form-group">
-				<label for="replyer" class="control-label">Replyer</label>
-				<input id="replyer" type="text" class="form-control">
-			</div>
+		<sec:authorize access="isAuthenticated()">
+			<sec:authentication property="principal.username" var="loginId"></sec:authentication>
+			<div class="well">
+				<div class="form-group">
+					<label for="replyer" class="control-label">Replyer</label>
+					<input id="replyer" type="text" class="form-control" value="${loginId}" readonly="readonly">
+				</div>
 
-			<div class="form-group">
-				<label for="replyText" class="control-label">Reply Text</label>
-				<textarea id="replyText" type="text" class="form-control" rows="4"></textarea>
-			</div>
+				<div class="form-group">
+					<label for="replyText" class="control-label">Reply Text</label>
+					<textarea id="replyText" type="text" class="form-control" rows="4"></textarea>
+				</div>
 
-			<button class="btn btn-primary" type="submit" id="btnReply">ADD REPLY</button>
-		</div>
+				<button class="btn btn-primary" type="submit" id="btnReply">ADD REPLY</button>
+			</div>
+		</sec:authorize>
 	</div>
 
 </div>

@@ -34,7 +34,7 @@
 			<input type="hidden" name="perPageNum" value="${criteria.perPageNum}">
 			<input type="hidden" name="searchType" value="${criteria.searchType}">
 			<input type="hidden" name="keyword" value="${criteria.keyword}">
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrf3421"/>
 
 			<div class="form-group">
 				<label for="no">No.</label>

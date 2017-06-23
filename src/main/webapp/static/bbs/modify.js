@@ -4,6 +4,7 @@
 $(document).ready(function () {
     var formObj = $("form[role='form']");
     var bno = $("#no").val();
+    var csrf = "?" + $("#csrf").attr("name") + "=" + $("#csrf").val();
 
     getAttachFiles(bno);
 
@@ -35,7 +36,7 @@ $(document).ready(function () {
         var that = $(this);
 
         $.ajax({
-            url: "/deleteFile",
+            url: "/deleteFile" + csrf,
             type: "POST",
             data: {
                 fileName: $(this).attr("data-src")
@@ -66,7 +67,7 @@ $(document).ready(function () {
         formData.append("file", file);
 
         $.ajax({
-            url: '/uploadAjax',
+            url: '/uploadAjax' + csrf,
             data: formData,
             dataType: 'text',
             processData: false,
