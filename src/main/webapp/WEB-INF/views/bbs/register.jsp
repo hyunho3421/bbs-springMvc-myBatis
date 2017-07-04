@@ -1,6 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
@@ -34,7 +33,6 @@
 			<input type="hidden" name="perPageNum" value="${criteria.perPageNum}">
 			<input type="hidden" name="searchType" value="${criteria.searchType}">
 			<input type="hidden" name="keyword" value="${criteria.keyword}">
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrf"/>
 
 			<div class="form-group">
 				<label for="title">Title</label>
@@ -48,8 +46,7 @@
 
 			<div class="form-group">
 				<label for="writer">Writer</label>
-				<sec:authentication property="principal.username" var="loginId"></sec:authentication>
-				<input type="text" class="form-control" name="writer" id="writer" value="${loginId}" readonly>
+				<input type="text" class="form-control" name="writer" id="writer" value="${login.id}" readonly>
 			</div>
 
 			<div class="fileDrop form-group">

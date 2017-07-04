@@ -20,9 +20,7 @@ public class BoardServiceImpl implements BoardService {
     private BoardDAO boardDAO;
 
     @Override
-    @Transactional
     public Board read(int no) throws Exception {
-        boardDAO.increaseViewCnt(no);
         return boardDAO.read(no);
     }
 
