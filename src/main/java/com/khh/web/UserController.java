@@ -2,21 +2,12 @@ package com.khh.web;
 
 import com.khh.domain.LoginDTO;
 import com.khh.domain.User;
-import com.khh.service.UserDetailService;
 import com.khh.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,10 +18,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.security.Principal;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by hyunhokim on 2017. 6. 5..
@@ -39,27 +27,66 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
     private static Logger logger = LoggerFactory.getLogger(UserController.class);
+    private static final String LOGIN = "login";
 
     @Autowired
     private UserService userService;
 
-    @Autowired
-    protected UserDetailService userDetailService;
-
     @RequestMapping(value = "/login",  method = RequestMethod.GET)
-    public String loginGET(@ModelAttribute("dto")LoginDTO dto, HttpServletRequest request) {
+    public String loginGET(@ModelAttribute("dto")LoginDTO dto) {
 
-        String referrer = request.getHeader("Referer");
-        request.getSession().setAttribute("prevPage", referrer);
+        return "/user/login";
+    }
+
+    @RequestMapping(value = "/loginPost", method = RequestMethod.POST)
+    public String loginPOST(LoginDTO dto, HttpSession session, Model model) throws Exception {
+        User user  = userService.login(dto);
+
+        if(user == null) {
+            return "/user/login";
+        }
+
+        model.addAttribute("user", user);
+
+        if (dto.isUseCookie()) {
+            int amount = 60 * 60 * 24 * 7;
+
+            Date sessionLimit = new Date(System.currentTimeMillis() + (1000 * amount));
+
+            userService.keepLogin(user.getId(), session.getId(), sessionLimit);
+        }
 
         return "/user/login";
     }
 
     @ResponseBody
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public ResponseEntity<String> logoutGET() throws Exception {
+    public ResponseEntity<String> logoutGET(
+            HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
 
-        return new ResponseEntity<String>("logout_success", HttpStatus.OK);
+        Object obj = session.getAttribute("login");
+
+        if(obj != null) {
+            User user = (User) obj;
+
+            //세션 삭제
+            session.removeAttribute("login");
+            session.invalidate();
+
+            //쿠키 삭제
+            Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+
+            if (loginCookie != null) {
+                loginCookie.setValue("");
+                loginCookie.setPath("/");
+                loginCookie.setMaxAge(0);
+                response.addCookie(loginCookie);
+            }
+
+            return new ResponseEntity<String>("logout_success", HttpStatus.OK);
+        }
+
+        return new ResponseEntity<String>("fail", HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(value = "/join", method = RequestMethod.GET)
@@ -73,13 +100,8 @@ public class UserController {
 
         userService.joinUser(user);
 
-        UserDetails ckUserDetails = userDetailService.loadUserByUsername(user.getId());
-        Authentication authentication = new UsernamePasswordAuthenticationToken(ckUserDetails, user.getPassword(), ckUserDetails.getAuthorities());
-
-        SecurityContext securityContext = SecurityContextHolder.getContext();
-        securityContext.setAuthentication(authentication);
-        HttpSession session = request.getSession(true);
-        session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext);
+        HttpSession session = request.getSession();
+        session.setAttribute(LOGIN, user);
 
         return "redirect:/bbs/list";
     }

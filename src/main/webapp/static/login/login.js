@@ -6,8 +6,7 @@ $(document).ready(function () {
 
     $("#btnLogin").on("click", function () {
         formObj.attr("method", "POST");
-        // formObj.attr("action", "/j_spring_security_check");
-        // formObj.attr("action", "/user/loginPost");
+        formObj.attr("action", "/user/loginPost");
         formObj.submit();
     });
 

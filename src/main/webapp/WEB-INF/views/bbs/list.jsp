@@ -29,7 +29,7 @@
 				<th width="60%">제목</th>
 				<th>작성자</th>
 				<th>등록일</th>
-				<th class="text-center">조회수</th>
+				<th>조회수</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -39,7 +39,7 @@
 					<td><a href="/bbs/view${pageMaker.makeSearchQuery(pageMaker.criteria.page)}&no=${board.no}">${board.title}</a></td>
 					<td>${board.writer}</td>
 					<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${board.reg_date}" /></td>
-					<td class="text-center"><span class="badge">${board.view_cnt}</span></td>
+					<td><span class="badge">${board.view_cnt}</span></td>
 				</tr>
 			</c:forEach>
 		<c:if test="${empty list}">
