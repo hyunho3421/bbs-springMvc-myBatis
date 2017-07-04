@@ -66,14 +66,15 @@ function validation() {
     return false;
 }
 
+
 function checkExistID() {
     var id = $("#id").val();
-
     var isExist;
 
     $.ajax({
         type: 'get',
         url: '/user/join/id/' + id,
+        async: false,
         success : function (result) {
             if(result == 'existID') {
                 isExist = true;

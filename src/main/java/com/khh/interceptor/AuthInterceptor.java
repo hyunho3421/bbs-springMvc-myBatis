@@ -1,10 +1,14 @@
 package com.khh.interceptor;
 
+import com.khh.domain.Board;
 import com.khh.domain.User;
+import com.khh.service.BoardService;
 import com.khh.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.util.WebUtils;
 
@@ -22,53 +26,39 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private BoardService boardService;
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        HttpSession session = request.getSession();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(authentication.getName());
 
-        if(session.getAttribute("login") == null) {
-            logger.info("current user is not logined");
+        String qs = request.getQueryString();
 
-            saveDest(request);
+        if(qs != null) {
+            int no_index = qs.lastIndexOf("no=");
+            int bbs_no = 0;
 
-            Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+            if(no_index > -1) {
+                int amp_index = qs.indexOf("&", no_index);
 
-            if (loginCookie != null) {
-                User user = userService.checkUserWithSessionKey(loginCookie.getValue());
+                if(amp_index > -1) {
+                    bbs_no = Integer.parseInt((qs.substring(no_index + 3, amp_index)));
+                } else {
+                    bbs_no = Integer.parseInt(qs.substring(no_index + 3));
+                }
 
-                logger.info("User" + user.toString());
+                Board board = boardService.read(bbs_no);
 
-                if(user != null) {
-                    session.setAttribute("login", user);
-                    return true;
+                if (!board.getWriter().equals(authentication.getName())) {
+                    response.sendRedirect("/bbs/denied");
                 }
             }
-
-            if(request.getRequestURI().equals("/bbs/list")) {
-                return request.getRequestURI().equals("/bbs/list");
-            }
-
-            response.sendRedirect("/user/login");
-            return false;
         }
 
         return true;
+
     }
 
-    private void saveDest(HttpServletRequest request) {
-        String uri = request.getRequestURI();
-
-        String query = request.getQueryString();
-
-        if (query == null || query.equals("null")) {
-            query = "";
-        } else {
-            query = "?" + query;
-        }
-
-        if (request.getMethod().equals("GET")) {
-            logger.info("dest: " + uri + query);
-            request.getSession().setAttribute("dest", uri + query);
-        }
-    }
 }

@@ -16,7 +16,7 @@
     <br />
 
     <div class="well">
-        <form role="form">
+        <form role="form" action="/j_spring_security_check">
             <div class="form-group">
                 <label for="id">ID:</label>
                 <input type="text" class="form-control" id="id" name="id">
@@ -30,13 +30,16 @@
             <div class="row">
                 <div class="col-md-4 text-left">
                     <div class="checkbox">
-                        <label><input type="checkbox" name="useCookie"> Remember me &nbsp;/&nbsp; <a href="/user/join">join us</a></label>
+                            <label><input id = "remember_me" name ="_spring_security_remember_me" type = "checkbox"/>
+                                Remember me &nbsp;/&nbsp; <a href="/user/join">join us</a></label>
                     </div>
                 </div>
                 <div class="col-md-8 text-right">
                     <button class="btn btn-default" id="btnLogin">Sign In</button>
                 </div>
             </div>
+
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
         </form>
     </div>
 

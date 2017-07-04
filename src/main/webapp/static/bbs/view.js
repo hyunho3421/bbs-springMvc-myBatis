@@ -2,6 +2,8 @@
  * Created by hyunhokim on 2017. 4. 18..
  */
 $(document).ready(function () {
+    var csrf = "?" + $("#csrf").attr("name") + "=" + $("#csrf").val();
+
     getAttachFiles($("input[name=no]").val());
 
     getRepliesList(1);
@@ -25,7 +27,7 @@ $(document).ready(function () {
         });
 
         if(arr.length > 0) {
-            $.post("/deleteAllFiles", {files:arr}, function () {
+            $.post("/deleteAllFiles" + csrf, {files:arr}, function () {
 
             });
         }
@@ -38,6 +40,8 @@ $(document).ready(function () {
 
     $("#btnList").on("click", function () {
         // history.go(-1);
+        $("input[name=no]").remove();
+
         formObj.attr("action", "/bbs/list");
         formObj.attr("method", "GET");
         formObj.submit();
@@ -50,7 +54,7 @@ $(document).ready(function () {
 
         $.ajax({
             type : 'post',
-            url : '/replies',
+            url : '/replies' + csrf,
             headers : {
                 "Content-Type" : "application/json",
                 "X-HTTP-Method-Override" : "POST"
