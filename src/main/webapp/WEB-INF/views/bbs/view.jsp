@@ -16,6 +16,9 @@
 <div class="container">
 	<jsp:include page="../header.jsp" />
 
+
+	<sec:authentication var="login" property="principal" />
+
 	<br />
 	<div class="well">
 		<form role="form">
@@ -48,9 +51,7 @@
 
 		<div align="right" class="list-group">
 			<sec:authorize access="isAuthenticated()">
-				<sec:authentication property="principal.username" var="loginId"></sec:authentication>
-
-				<c:if test="${board.writer eq loginId}">
+				<c:if test="${board.writer eq login.username}">
 					<button class="btn btn-warning" type="submit" id="btnModify">Modify</button>
 					<button class="btn btn-danger" type="submit" id="btnDelete">Delete</button>
 				</c:if>
@@ -73,11 +74,10 @@
 		</div>
 
 		<sec:authorize access="isAuthenticated()">
-			<sec:authentication property="principal.username" var="loginId"></sec:authentication>
 			<div class="well">
 				<div class="form-group">
 					<label for="replyer" class="control-label">Replyer</label>
-					<input id="replyer" type="text" class="form-control" value="${loginId}" readonly="readonly">
+					<input id="replyer" type="text" class="form-control" value="${login.username}" readonly="readonly">
 				</div>
 
 				<div class="form-group">

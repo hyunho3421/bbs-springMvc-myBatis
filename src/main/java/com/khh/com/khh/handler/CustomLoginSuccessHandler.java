@@ -15,7 +15,8 @@ import java.io.IOException;
 public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+                                        Authentication authentication) throws ServletException, IOException {
         HttpSession session = request.getSession();
         if (session != null) {
             String redirectUrl = (String) session.getAttribute("prevPage");
@@ -23,7 +24,8 @@ public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSu
                 session.removeAttribute("prevPage");
                 getRedirectStrategy().sendRedirect(request, response, redirectUrl);
             } else {
-                super.onAuthenticationSuccess(request, response, authentication);
+//                super.onAuthenticationSuccess(request, response, authentication);
+                getRedirectStrategy().sendRedirect(request, response, "/bbs/list");
             }
         } else {
             super.onAuthenticationSuccess(request, response, authentication);

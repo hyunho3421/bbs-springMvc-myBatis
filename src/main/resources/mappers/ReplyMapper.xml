@@ -32,6 +32,6 @@
     </delete>
 
     <select id="count" resultType="int">
-        SELECT count(*) FROM reply
+        SELECT count(*) FROM reply where bno = #{bno}
     </select>
 </mapper>

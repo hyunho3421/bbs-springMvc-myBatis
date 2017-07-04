@@ -19,6 +19,17 @@
 			width: 100%;
 			height:200px;
 			border: 1px dotted blue;
+			padding: 100px 0px;
+		}
+
+		.center-background-text {
+			text-align: center;
+
+			top: 50%;
+			left: 50%;
+			margin-top: -50px;
+			margin-left: -60px;
+			z-index: 99;
 		}
 	</style>
 </head>
@@ -34,7 +45,7 @@
 			<input type="hidden" name="perPageNum" value="${criteria.perPageNum}">
 			<input type="hidden" name="searchType" value="${criteria.searchType}">
 			<input type="hidden" name="keyword" value="${criteria.keyword}">
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrf3421"/>
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrf"/>
 
 			<div class="form-group">
 				<label for="no">No.</label>
@@ -57,7 +68,7 @@
 		</form>
 
 		<div class="fileDrop form-group">
-
+			<div class="center-background-text"><h1 style="color: gray;">이미지나 파일을 드레그 해서 넣어주세요.</h1></div>
 		</div>
 
 		<div class="attachFiles row">

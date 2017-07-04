@@ -52,6 +52,10 @@ $(document).ready(function () {
         var replyer = $("#replyer").val();
         var replyText = $("#replyText").val();
 
+        if (!validation()) {
+            return false;
+        }
+
         $.ajax({
             type : 'post',
             url : '/replies' + csrf,
@@ -69,7 +73,6 @@ $(document).ready(function () {
                 if (result == 'SUCCESS') {
                     alert("등록 되었습니다.");
 
-                    $("#replyer").val("");
                     $("#replyText").val("");
                 }
 
@@ -119,7 +122,7 @@ function printPaging(pageMaker) {
         str += "<li><a href='" + (pageMaker.startPage - 1) + "' > << </a></li>";
     }
 
-    for (var i = pageMaker.startPage; i< pageMaker.endPage; i++) {
+    for (var i = pageMaker.startPage; i <= pageMaker.endPage; i++) {
         var strClass = pageMaker.criteria.page == i ? 'class=active' : '';
         str += "<li " + strClass + "><a href='" + i + "'>" + i + "</a></li>"
     }
@@ -173,4 +176,17 @@ function getAttachFiles(bno) {
 
         $(".attachFiles").html(str);
     });
+}
+
+function validation() {
+    var replyText = $("#replyText").val();
+
+    if (replyText.length < 1) {
+        alert("댓글 내용을 적어주세요.");
+        $("#replyText").focus();
+
+        return false;
+    }
+
+    return true;
 }

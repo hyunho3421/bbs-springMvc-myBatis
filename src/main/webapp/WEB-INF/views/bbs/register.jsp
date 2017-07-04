@@ -19,6 +19,16 @@
 			height:200px;
 			border: 1px dotted blue;
 		}
+
+		.fileDrop .center-background-text {
+			text-align: center;
+
+			top: 50%;
+			left: 50%;
+			margin-top: 50px;
+			margin-left: -60px;
+
+		}
 	</style>
 </head>
 <body>
@@ -53,6 +63,7 @@
 			</div>
 
 			<div class="fileDrop form-group">
+				<div class="center-background-text"><h1 style="color: gray;">이미지나 파일을 드레그 해서 넣어주세요.</h1></div>
 			</div>
 
 			<div class="uploadedList row">

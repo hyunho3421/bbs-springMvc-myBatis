@@ -63,8 +63,8 @@ public class RepliesController {
 
             map.put("list", list);
 
-            int repltyCount = replyService.count(bno);
-            pageMaker.setTotalCount(repltyCount);
+            int replyCount = replyService.count(bno);
+            pageMaker.setTotalCount(replyCount);
 
             map.put("pageMaker", pageMaker);
 

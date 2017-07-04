@@ -18,6 +18,10 @@ $(document).ready(function () {
             }
         });
 
+        if (!validation()) {
+            return false;
+        }
+
         that.append(str);
 
         formObj.submit();
@@ -149,4 +153,25 @@ function getFullName(fullName) {
     var result = fullName.substr(14);
 
     return result.substr(result.indexOf("_") + 1);
+}
+
+function validation() {
+    var title = $("input[name=title]").val();
+    var content = $("textarea[name=content]").val();
+
+    if (title.length < 1) {
+        alert("제목을 입력해주세요.");
+        $("input[name=title]").focus();
+
+        return false;
+    }
+
+    if (content.length < 1) {
+        alert("내용을 입력해주세요.");
+        $("textarea[name=content]").focus();
+
+        return false
+    }
+
+    return true;
 }
