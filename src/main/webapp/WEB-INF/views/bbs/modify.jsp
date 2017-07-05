@@ -63,7 +63,7 @@
 
 			<div class="form-group">
 				<label for="writer">Writer</label>
-				<input type="text" class="form-control" name="writer" id="writer" value="${board.writer}">
+				<input type="text" class="form-control" name="writer" id="writer" value="${board.writer}" readonly="true">
 			</div>
 		</form>
 
