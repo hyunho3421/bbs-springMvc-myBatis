@@ -9,6 +9,9 @@
            http://www.springframework.org/schema/security/spring-security-4.2.xsd">
 
 	<http auto-config='true' use-expressions="true">
+		<headers>
+			<frame-options policy="SAMEORIGIN"/>
+		</headers>
 		<access-denied-handler error-page="/bbs/list" />
 
 		<intercept-url pattern="/user/login" access="isAnonymous()" />
@@ -32,7 +35,7 @@
 
 		<remember-me remember-me-parameter="_spring_security_remember_me" token-validity-seconds="604800"/>
 		<!-- enable csrf protection -->
-		<csrf/>
+		<!--<csrf/>-->
 	</http>
 
 

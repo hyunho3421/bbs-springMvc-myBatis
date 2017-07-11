@@ -5,6 +5,10 @@ $(document).ready(function () {
    var formObj = $("form[role='form']");
    var csrf = "?" + $("#csrf").attr("name") + "=" + $("#csrf").val();
 
+    CKEDITOR.replace('ckeditor',{
+        filebrowserUploadUrl:'/uploadCkeditor' + csrf
+    });
+
     $('#btnRegister').on("click", function () {
         var that = $(formObj);
 
@@ -157,7 +161,7 @@ function getFullName(fullName) {
 
 function validation() {
     var title = $("input[name=title]").val();
-    var content = $("textarea[name=content]").val();
+    // var content = $("textarea[name=content]").val();
 
     if (title.length < 1) {
         alert("제목을 입력해주세요.");
@@ -166,12 +170,12 @@ function validation() {
         return false;
     }
 
-    if (content.length < 1) {
-        alert("내용을 입력해주세요.");
-        $("textarea[name=content]").focus();
-
-        return false
-    }
+    // if (content.length < 1) {
+    //     alert("내용을 입력해주세요.");
+    //     $("textarea[name=content]").focus();
+    //
+    //     return false
+    // }
 
     return true;
 }

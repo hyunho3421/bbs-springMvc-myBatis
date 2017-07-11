@@ -6,6 +6,10 @@ $(document).ready(function () {
     var bno = $("#no").val();
     var csrf = "?" + $("#csrf").attr("name") + "=" + $("#csrf").val();
 
+    CKEDITOR.replace('ckeditor',{
+        filebrowserUploadUrl:'/uploadCkeditor' + csrf
+    });
+
     getAttachFiles(bno);
 
     $('#btnCancel').on("click", function () {

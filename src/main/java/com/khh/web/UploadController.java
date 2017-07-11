@@ -1,5 +1,6 @@
 package com.khh.web;
 
+import com.khh.domain.FileDTO;
 import com.khh.service.BoardService;
 import com.khh.util.MediaUtils;
 import com.khh.util.UploadFileUtils;
@@ -12,14 +13,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import sun.nio.ch.IOUtil;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.util.List;
 
 /**
@@ -134,5 +139,59 @@ public class UploadController {
         }
 
         return new ResponseEntity<String>("deleted", HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/uploadCkeditor", method = RequestMethod.POST)
+    public String multiplePhotoUpload(HttpServletRequest request, HttpServletResponse response, FileDTO fileDTO, Model model) {
+
+        try {
+
+            String result = UploadFileUtils.uploadImage(uploadPath,
+                    fileDTO.getUpload().getOriginalFilename(),
+                    fileDTO.getUpload().getBytes());
+
+            String fileUrl = "/displayFile" + result;
+
+            model.addAttribute("fileDTO", fileDTO);
+            model.addAttribute("fileUrl", fileUrl);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return "/ckeditorImageUpload";
+    }
+
+    //noti: fullName으로 들어오는 값에서 dot(.) 뒤에 값이 잘려서 정규식(:.+)으로 dot(.)뒤에 값도 포함도록함.
+    @ResponseBody
+    @RequestMapping("/displayFile/{year}/{month}/{day}/{fileName:.+}")
+    public ResponseEntity<byte[]> displayFile(
+            @PathVariable("year") String year,
+            @PathVariable("month") String month,
+            @PathVariable("day") String day,
+            @PathVariable("fileName") String fileName) throws Exception {
+        InputStream in = null;
+        ResponseEntity<byte[]> entity = null;
+
+        try {
+            HttpHeaders headers = new HttpHeaders();
+
+            String path = year + "/" + month + "/" + day + "/" + fileName;
+
+            in = new FileInputStream("/Users/hyunhokim/Documents/dev/study/" + path);
+
+            headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+            headers.add("Content-Disposition", "attachment; filename=\""
+                    + new String(fileName.getBytes("UTF-8"), "ISO-8859-1") + "\"");
+
+            entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.CREATED);
+        } catch (Exception e) {
+            e.printStackTrace();
+            entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
+        } finally {
+            in.close();
+        }
+
+        return entity;
     }
 }

@@ -103,7 +103,7 @@ function getRepliesList(page) {
                     + "<div class='panel-heading' data-rno='" + this.rno + "'>"
                     + this.replyer + " (" + commonDate_YYYYMMDD(this.reg_date) + ")"
                     + "</div>"
-                    + "<div class='panel-body'>"
+                    + "<div class='panel-body' style='word-break:break-all;'>"
                     + this.replyText
                     + "</div>"
                 + "</div>";

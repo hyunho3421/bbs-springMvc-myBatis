@@ -36,8 +36,9 @@
 		</div>
 
 		<div class="form-group">
-			<label for="content">Content</label>
-			<textarea class="form-control" name="content" id="content" rows="5" readonly="readonly">${board.content}</textarea>
+			<%--<label for="content">Content</label>--%>
+			<%--<textarea class="form-control" name="content" id="content" rows="5" readonly="readonly">${board.content}</textarea>--%>
+			<div class="well" style="background-color: white;">${board.content}</div>
 		</div>
 
 		<div class="form-group">
@@ -82,7 +83,7 @@
 
 				<div class="form-group">
 					<label for="replyText" class="control-label">Reply Text</label>
-					<textarea id="replyText" type="text" class="form-control" rows="4"></textarea>
+					<textarea id="replyText" type="text" class="form-control" rows="4" cols="60"></textarea>
 				</div>
 
 				<button class="btn btn-primary" type="submit" id="btnReply">ADD REPLY</button>

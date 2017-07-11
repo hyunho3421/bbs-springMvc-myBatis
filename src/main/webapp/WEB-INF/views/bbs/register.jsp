@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
@@ -52,8 +53,9 @@
 			</div>
 
 			<div class="form-group">
-				<label for="content">Content</label>
-				<textarea class="form-control" name="content" id="content" rows="5"></textarea>
+				<%--<label for="content">Content</label>--%>
+				<%--<textarea class="form-control" name="content" id="content" rows="5"></textarea>--%>
+				<textarea name="content" id="ckeditor" cols="60" rows="10"></textarea>
 			</div>
 
 			<div class="form-group">
@@ -76,7 +78,7 @@
 		</div>
 	</div>
 </div>
-
+<script type="text/javascript" src="/resources/ckeditor/ckeditor.js"></script>
 <script src="/resources/js/jquery-3.2.1.js" ></script>
 <script src="/resources/js/bootstrap.js" ></script>
 <script src="/static/common/common-js.js"></script>
